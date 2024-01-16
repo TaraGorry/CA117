@@ -1,0 +1,44 @@
+You have some water and some buckets to fill.
+
+Write a program called water_011.py that reads two lines of text from stdin.
+
+Line 1 contains a single integer, N, the number of litres of water available. N is in the range 0-1000.
+
+Line 2 lists the capacity in litres of one or more buckets. The capacity of each bucket is specified by a positive integer.
+
+Buckets must be filled in the order specified on line 2.
+
+Your program should output the number of buckets that can be completely filled before you run out of water.
+
+In this example we have 10 litres of water. We fill the first bucket (taking 6 litres), we fill the second bucket (taking another 2 litres) but we run out of water before we have completely filled the third bucket (it requires 5 litres). We output 2 (the number of buckets completely filled):
+
+Example Input:
+10
+6 2 5 1 1
+
+Example Output:
+2
+
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+input = sys.stdin.readlines()
+water = int(input[0])
+buckets = input[1].split(" ")
+
+for i in range(0, len(buckets)):
+  buckets[i] = int(buckets[i])
+
+counter = 0
+for bucket in buckets:
+  if water >= bucket:
+    water = water - bucket
+    counter += 1
+  else:
+    break
+print(counter)

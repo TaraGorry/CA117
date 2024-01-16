@@ -1,0 +1,35 @@
+Write a program called emails_011.py that reads DCU student
+email addresses from stdin.
+For each email address the program should print out the 
+corresponding student's name.
+
+Example Input:
+valerie.maguire2@mail.dcu.ie
+fred.quinn33@mail.dcu.ie
+jimmy.clancy5@mail.dcu.ie
+
+Example Output:
+Valerie Maguire
+Fred Quinn
+Jimmy Clancy
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+for line in sys.stdin:
+  line1 = line.split("@")
+  line2 = line1[0]
+  line3 = line2.split(".")
+  first_name = line3[0]
+  second_name = line3[1]
+
+  i = 0
+  while i < len(second_name):
+    if second_name[i].isdigit():
+      second_name = str(second_name[0:i])
+    i += 1
+  print(first_name.title(), second_name.title())

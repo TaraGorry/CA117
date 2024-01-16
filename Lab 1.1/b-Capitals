@@ -1,0 +1,35 @@
+Write a program called capitals_011.py that reads lines of 
+text from stdin.
+Each line consists od a single string.
+The program should capitalise the first and last characters
+of the string and print the result.
+You can assume every string contains at least two letters.
+
+Example Input:
+All
+that
+glitters
+is
+not
+gold
+
+Example Output:
+AlL
+ThaT 
+GlitterS 
+IS
+NoT
+GolD
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+for line in sys.stdin:
+  line = line.strip()
+  line = line.capitalize()
+  capitalised = line[len(line) - 1]
+  capitalised = capitalised.capitalize()
+  word = line[:len(line) - 1] + capitalised
+  print(word)

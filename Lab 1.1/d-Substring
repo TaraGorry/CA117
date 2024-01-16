@@ -1,0 +1,40 @@
+Write a program called substring_011.py that reads lines of
+text from stdin.
+Each line consists of two strings.
+The program should print True if the first string is a supstring
+of the second (and False otherwise).
+Note that differences in case can be ignored.
+
+Example Input:
+umpel Rumpelstiltskin
+UMPEL Rumpelstiltskin
+rump Rumpelstiltskin
+rumpy Rumpelstiltskin
+sTiLt Rumpelstiltskin
+Goldilocks Rumpelstiltskin
+Rumpelstiltskin RumpelstiLtskin
+
+Example Outout:
+True
+True
+True
+False
+True
+False
+True
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+for line in sys.stdin:
+  s = line.strip().lower().split()
+  character = s[0]
+  word = s[1]
+  if character in word:
+    print(True)
+  else:
+    print(False)

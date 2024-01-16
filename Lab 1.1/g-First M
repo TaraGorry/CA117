@@ -1,0 +1,34 @@
+Write a program called firstm_011.py that reads lines of 
+text from stdin.
+The prigram should print each line with the first word that 
+begins with a lower case "m" now capitalized.
+
+Example Input:
+Mickey Mouse was a kind of mouse.
+Mickey Mouse was a kind of mouse. A mouse with a sense of 
+humour.
+
+Example Outout:
+Mickey Mouse was a kind of Mouse.
+Mickey Mouse was a kind of Mouse. A mouse with a sense of 
+humour.
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+for line in sys.stdin:
+  output = ""
+  found = False
+  i = 0
+  word = line.split(" ")
+  while i < len(word):
+    if word[i][0:1] == "m" and found is False:
+      word[i] = word[i].capitalize()
+      found = True
+    output += word[i] + " "
+    i += 1
+  print(output.strip())

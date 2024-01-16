@@ -1,0 +1,38 @@
+Write a program called middle_011.py that reads lines of text 
+from stdin.
+Each line consists of a single string.
+The program should print out the middle character of each string.
+If the string does not have a middle character the program 
+should print "No middle character!"
+
+Example Input:
+All
+is
+fair
+in
+love
+and
+war
+
+Example Output:
+l
+No middle character!
+No middle character!
+No middle character!
+No middle character!
+n
+a
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+for line in sys.stdin:
+    line = line.strip()
+    if len(line) & 2 == 1:
+        print(line[len(line) // 2])
+    else:
+        print("No middle character!")

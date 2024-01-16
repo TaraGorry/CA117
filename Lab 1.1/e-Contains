@@ -1,0 +1,38 @@
+Write a program called contains_011.py that reads lines of 
+text from stdin.
+Each line consists of two strings.
+The program should print True if each of the characters in 
+the first string is also in the second string (and False 
+otherwise).
+Note that once a character has been matched in the second 
+string it cannot be matched again.
+Also note that differences in case can be ignored.
+
+Example Input:
+c cat
+AC cat
+act caT
+actt cat
+
+Example Output:
+True
+True
+True
+False
+
+
+Solition:
+
+#!/usr/bin/env python3
+
+import sys
+
+for line in sys.stdin:
+    list = line.casefold().split(" ")
+    a = list[0].rstrip()
+    for char in list[1]:
+        a = a.replace(char, "", 1)
+    if len(a) > 0:
+        print(False)
+    else:
+        print(True)
