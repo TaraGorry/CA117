@@ -24,7 +24,7 @@ False
 True
 
 
-Solution:
+Solution (using for loops and if statements):
 
 #!/usr/bin/env python3
 
@@ -38,3 +38,19 @@ for line in sys.stdin:
     print(True)
   else:
     print(False)
+
+
+
+Solution (using functions):
+
+#!/usr/bin/env python3
+
+import sys
+
+def substring(l, r):
+  """ Return True if l is a substring of r and False otherwise"""
+  return l in r
+
+for line in sts.stdin:
+  char, word = line.strip().lower().split()
+  print(substring(char, word))
