@@ -1,0 +1,91 @@
+Task:
+Write a python program called plural_012.py that reads nouns
+from stdin.
+For each noun read the program should print its plural according 
+to the following rules:
+
+ - Add "es" if the noun ends in "ch", "sh", "x", "s" or "z".
+ - If a noun ends in a consonant + "y" drop the "y" and add "ies".
+ - If a noun ends in "f" or "fe" drop the "f" or "fe" and add "ies".
+ - If a noun ends in "o" add "es".
+ - Otherwise add "s".
+
+Example Input:
+peach
+wife
+bay
+dish
+box
+fuss
+fuzz
+banjo
+dainty
+toy
+self
+nut
+
+Example Output:
+peaches
+wives
+bays
+dishes
+boxes
+fusses
+fuzzes
+banjoes
+dainties
+toys
+selves
+nuts
+
+
+Solution (without Functions):
+
+#!/usr/bin/env python3
+
+import sys
+
+inputs = sys.stdin.readlines()
+
+for input in inputr:
+  lastTwoChar = input[-3].strip()
+  last char = input[-2].strip()
+  secLastChar = input[-3:-2].strip()
+  yChar = input[-2:].strip()
+  if lastTwoChar == "ch" or lastTwoChar == "sh":
+    input = input.strip() + "es"
+  elif lastChar == "x" or lastChar == "s" or lastChar == "z":
+    input = input.strip() + "es"
+  elif secLastChar != "a" and sceLastChar != "e" and sceLastChar != "i" and secLastChar != "o" and secLastChar != "u" and lastChar == "y":
+    input = input[:-2].strip() + "ies"
+  elif lastChar == "f" or lastChar == "fe":
+    input = input.strip("f")[0] + "ves"
+  elif last Char == "o":
+    input = input.strip() + "es"
+  else:
+    input = input.strip() + "s"
+  print(input)
+
+
+
+Solution (with Functions):
+
+#!/usr/bin/env python3
+
+import sys
+
+es_endings = ("ch", "sh", "x", "s", "z", "o")
+ves_endings = ("fe", "f")
+vowels = "aeiou"
+
+def plural(noun):
+  if noun.endswith(es_endings):
+    return noun + "es"
+  if noun.endswith(ves_endings):
+    return noun.rsplit("f", 1)[0] + "ves"
+  if noun[-1] == "y" and noun[-2] not in vowels:
+    return noun[:-1] + "ies"
+  return noun + "s"
+
+for noun in sys.stdin:
+  print(plural(noun.strip()))

@@ -1,0 +1,87 @@
+Task:
+Write a program called league_012.py that reads in the lines
+of a league table from stdin and uses f-strings to display 
+them in neatly tabulated columns.
+
+There is more word in this than might first appear:
+ - The width of the CLUB field depends on the list of clubs supplied to the program: 
+   It should be just wide enough to accommondate the longest club name. This means you will have to do some preprocessing on the list read from stdin before you can print.
+
+ - The P field is 2 characters wide. All other fields are 3 characters wide. (Not including the space between fields.)
+
+ - Extracting the club name will require some ingenuity.
+   HINT:
+   If each line is converted to a list of tokens then the first word in the club name is at a fixed index from the left, while the last word in the club name is at a fixed indec from the right. Thus a specially crafted slice over the tokend in each line can be used to extract the club name.
+
+Example Input:
+1 Arsenal 16 14 1 1 40 14 26 43
+2 Manchester City 16 11 3 2 44 16 28 36
+3 Newcastle United 17 9 7 1 32 11 21 34
+4 Manchester United 16 10 2 4 24 20 4 32
+5 Tottenham Hotspur 17 9 3 5 33 25 8 30
+6 Liverpool 17 8 4 5 34 22 12 28
+7 Brentford 18 6 8 4 30 28 2 26
+8 Fulham 17 7 4 6 29 27 2 25
+9 Chelsea 16 7 4 5 20 18 2 25
+10 Brighton & Hove Albion 16 7 3 6 28 24 4 24
+11 Crystal Palace 16 6 4 6 17 21 -4 22
+12 Aston Villa 17 6 3 8 19 25 -6 21
+13 Leicester City 17 5 2 10 26 30 -4 17
+14 Leeds United 16 4 4 8 23 29 -6 16
+15 AFC Bournemouth 17 4 4 9 18 36 -18 16
+16 Everton 17 3 6 8 13 20 -7 15
+17 West Ham United 17 4 2 11 13 22 -9 14
+18 Nottingham Forest 17 3 5 9 12 34 -22 14
+19 Wolverhampton Wanderers 17 3 4 10 10 26 -16 13
+20 Southampton 17 3 3 11 15 32 -17 12
+
+Example Output:
+POS CLUB                     P   W   D   L  GF  GA  GD PTS
+  1 Arsenal                 16  14   1   1  40  14  26  43
+  2 Manchester City         16  11   3   2  44  16  28  36
+  3 Newcastle United        17   9   7   1  32  11  21  34
+  4 Manchester United       16  10   2   4  24  20   4  32
+  5 Tottenham Hotspur       17   9   3   5  33  25   8  30
+  6 Liverpool               17   8   4   5  34  22  12  28
+  7 Brentford               18   6   8   4  30  28   2  26
+  8 Fulham                  17   7   4   6  29  27   2  25
+  9 Chelsea                 16   7   4   5  20  18   2  25
+ 10 Brighton & Hove Albion  16   7   3   6  28  24   4  24
+ 11 Crystal Palace          16   6   4   6  17  21  -4  22
+ 12 Aston Villa             17   6   3   8  19  25  -6  21
+ 13 Leicester City          17   5   2  10  26  30  -4  17
+ 14 Leeds United            16   4   4   8  23  29  -6  16
+ 15 AFC Bournemouth         17   4   4   9  18  36 -18  16
+ 16 Everton                 17   3   6   8  13  20  -7  15
+ 17 West Ham United         17   4   2  11  13  22  -9  14
+ 18 Nottingham Forest       17   3   5   9  12  34 -22  14
+ 19 Wolverhampton Wanderers 17   3   4  10  10  26 -16  13
+ 20 Southampton             17   3   3  11  15  32 -17  12
+
+
+
+Solution:
+
+#!/usr/bin/env python3
+ 
+import sys
+ 
+league_table = sys.stdin.readlines()
+ 
+longest_club_name = 0
+for line in league_table:
+  line = line.strip().split()
+  club_name = " ".join(line[1:-8])
+
+  if len(club_name) > longest_club_name:
+    longest_club_name = len(club_name)
+    
+longest_club_name = int(longest_club_name)
+club = 'CLUB'
+
+print(f"POS {club:<{longest_club_name}}  P   W   D   L  GF  GA  GD PTS")
+
+for line in league_table:
+  line = line.strip().split()
+  club_name = " ".join(line[1:-8])
+  print(f" {line[0]:>2} {club_name:<{longest_club_name}} {line[-8]} {line[-7]:>3} {line[-6]:>3} {line[-5]:>3} {line[-4]:>3} {line[-3]:>3} {line[-2]:>3}{line[-1]:>4}")
