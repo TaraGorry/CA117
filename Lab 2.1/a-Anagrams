@@ -1,0 +1,47 @@
+Task:
+Two words are anagrams if the letters of one word can be 
+rearranged to form the other word.
+For example angel and glean are anagrams.
+Write a Python program called anagram_021.py that reads in 
+pairs of words (one pair per line) from stdin and prints True of the pair are anagrams and False otherwise.
+
+Example Input:
+cinema iceman
+dog god
+house car
+stub buts
+angel glean
+aangl angel
+a aardvark
+aardvark a
+
+Example Output:
+True
+True
+False
+True
+True
+False
+False
+False
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+def anagram(left, right):
+  for word in left:
+    if word in right:
+      right = right.replace(word, "", 1)
+    else:
+      return False
+  return right == ""
+
+for line in sys.stdin:
+  tokens = line.strip().split()
+  left, right = tokens
+  words = anagram(left, right)
+  print(words)

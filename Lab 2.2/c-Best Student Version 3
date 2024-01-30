@@ -1,0 +1,46 @@
+Task:
+Extend the exception handling in the previous task such that 
+rather than exiting on encountering a non-integer mark the 
+program simply ignors it and continues to process all remaining 
+marks.
+Call the new program best_v3_022.py
+
+Example Input:
+64 Mary Ryan
+89 Michael Murphy
+2S Neymar
+78 Jenny Smith
+57 Patrick James McMahon
+89 John Kelly
+74 John C. Reilly
+
+Example Output:
+Invalid mark 2S encountered. Skipping.
+Best student: Michael Murphy
+Best mark: 89
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+with open(sys.argv[1], "r") as f:
+  lines = f.readlines()
+
+highest = 0
+i = 0
+while i < len(lines):
+  try:
+    line = lines[i].strip().split()
+    mark = int(line[0])
+    if mark > highest:
+      highest = mark
+      name = " ".join(line[1:])
+  except ValueError:
+    print(f"Invalid mark {line[0]} encountered. Skipping.")
+  i += 1
+
+print(f"Best student: {name}")
+print(f"Best mark: {highest}")

@@ -1,0 +1,52 @@
+Task:
+Write a program called best_v1_022.py that takes a filename 
+as a single command line argument.
+The named file contains a list of student marks where each 
+line consists of a mark followed be a student name.
+The program should print out the name of the student who 
+achieved the highest mark as well of the mark itself. Where 
+there is a joint top mark the program should print the name 
+associated with the first one encountered.
+
+Example Input:
+64 Mary Ryan
+89 Michael Murphy
+22 Neymar
+78 Jenny Smith
+57 Patrick James McMahon
+89 John Kelly
+74 John C. Reilly
+
+Example Output:
+Best student: Michael Murphy
+Best mark: 89
+
+- If the filename specified on the command line cannot be 
+  opened the program must make appropriate use of exception handling to display an error message and exit gracefully.
+
+Example:
+python3 best_v1_022.py best_v1_input_00_022.txtt
+The file best_v1_input_00_022.txtt could not be opened.
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+with open(sys.argv[1], "r") as f:
+  lines = f.readlines()
+
+highest = 0
+i = 0
+while i < len(lines):
+  line = lines[i].strip().split()
+  mark = int(line[0])
+  if mark > highest:
+    highest = mark
+    name = " ".join(line[1:])
+  i += 1
+
+print(f"Best student: {name})
+print(f"Best mark: {highest})

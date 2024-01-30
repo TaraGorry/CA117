@@ -1,0 +1,45 @@
+Task:
+Extend the exception handling in the previous task such that 
+the program exists gracefully if any of the marks in the input 
+file are not integers.
+Call the new program best_v2_022.py.
+
+Example Input:
+64 Mary Ryan
+89 Michael Murphy
+2S Neymar
+78 Jenny Smith
+57 Patrick James McMahon
+89 John Kelly
+74 John C. Reilly
+
+Example Output:
+Invalid mark 2S encountered. Exiting.
+
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+try:
+  with open(sys.argv[1], "r") as f:
+    lines = f.readlines()
+
+  highest = 0
+  i = 0
+  while i < len(lines):
+    line = lines[i].strip().split()
+    mark = int(line[0])
+    if mark > highest:
+      highest = mark
+      name = " ".join(line[1:])
+    i += 1
+  
+  print(f"Best student: {name}")
+  print(f"Best mark: {highest}")
+
+except ValueError:
+  print(f"Invalid mark {line[0]} encountered. Exiting.")

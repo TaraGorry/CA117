@@ -1,0 +1,45 @@
+Task:
+Write a program called abc_021.py that reads two lines of 
+text from stdin.
+The first line consists of three numbers: A, B, C. The number 
+can be in any order but we know that A < B < C.
+The second line specifies the order that your program should output the numbers.
+
+Example Input 1:
+6 4 2
+CAB
+
+Example Output 1:
+6 2 4
+
+Example Input 2:
+1 5 3
+ABC
+
+Example Output 2:
+1 3 5
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+lines = sys.stdin.readlines()
+nums = lines[0].split()
+order = lines[1]
+nums.sort(key = int)
+
+abc = []
+for char in order:
+  if char == "A":
+    abc.append(num[0])
+  elif char == "B":
+    abc.append(num[1])
+  elif char == "C":
+    abc.append(num[2])
+
+abc = " ".join(abc)
+
+print(abc)

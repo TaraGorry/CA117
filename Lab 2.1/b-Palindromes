@@ -1,0 +1,68 @@
+Task:
+A palindrome is a word, phrase, number or other sequence of
+characters which reads the same backwards as forwards.
+Allowances are made for capital letters, punctuation and 
+white space (word dividers).
+Write a program called palindrome_021.py that reads lines 
+of text from stdin and prints True if the line is a palindrome 
+and False otherwise.
+
+HINTS:
+  - Convert the string to lowercase first. Use pydoc to check
+    out the str class documentation. You need to find a method 
+    that will do the conversion for you.
+  - You need to retain only alphanumeric characters. Again use 
+    pydoc to check out the str class documentation to find a 
+    method that will help you.
+  - Once you have the string in the above form (i.e. in 
+    lowercase with all non-alphanumeric characters removed) 
+    then check whether it is the same sequence backwards as 
+    forwards.
+
+Example Input:
+Step on no pets.
+Step on no cats.
+Able was I ere I saw Elba.
+Doc, note: I dissent. A fast never prevents a fatness. I diet on cod.
+Bananas
+Abel was I ere
+A
+Aa
+ABa
+123.
+1221.
+4444444.
+This is not a palindrome.
+
+Example Output:
+True
+False
+True
+True
+False
+False
+True
+True
+True
+False
+True
+True
+False
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+import re
+
+lines = sys.stdin.readlines()
+
+for line in lines:
+  line = re.sub(r"\W+", "", line)
+  ispal = line.lower().strip()
+  notpal = ispal[::-1]
+  if ispal == notpal:
+    print(True)
+  else:
+    print(False)

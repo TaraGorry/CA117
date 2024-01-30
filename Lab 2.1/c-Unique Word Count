@@ -1,0 +1,43 @@
+Task:
+Write a program called unique_021.py that counts the total 
+number of unique words in lines of text read from stdin.
+Feeding the program gettysburg.txt produce the following 
+output:
+
+python3 unique_021.py < gettysburg.txt
+143
+
+Hints:
+  - You will have to strip surrounding punctuatuon from words in the text. For example house and house. should not be counted as separated unique words. For this task you may find string.punctuation usefule.
+
+  - You will have to cater for upper and lower case versions of words. For example Four and four should not be counted as separate unique words.
+
+  - Only alphanumeric tokens are to be counted as words. For example November and 19 are words but - is not.
+
+  - Here is the sorted list of what the program should consider a unique word:
+
+  ['1863', '19', 'a', 'above', 'abraham', 'add', 'advanced', 'ago', 'all', 'altogether', 'and', 'any', 'are', 'as', 'battle-field', 'be', 'before', 'birth', 'brave', 'brought', 'but', 'by', 'can', 'cause', 'civil', 'come', 'conceived', 'consecrate', 'consecrated', 'continent', 'created', 'dead', 'dedicate', 'dedicated', 'detract', 'devotion', 'did', 'died', 'do', 'earth', 'endure', 'engaged', 'equal', 'far', 'fathers', 'field', 'final', 'fitting', 'for', 'forget', 'forth', 'fought', 'four', 'freedom', 'from', 'full', 'gave', 'god', 'government', 'great', 'ground', 'hallow', 'have', 'here', 'highly', 'honored', 'in', 'increased', 'is', 'it', 'larger', 'last', 'liberty', 'lincoln', 'little', 'live', 'lives', 'living', 'long', 'measure', 'men', 'met', 'might', 'nation', 'never', 'new', 'nobly', 'nor', 'not', 'note', 'november', 'now', 'of', 'on', 'or', 'our', 'people', 'perish', 'place', 'poor', 'portion', 'power', 'proper', 'proposition', 'rather', 'remaining', 'remember', 'resolve', 'resting', 'say', 'score', 'sense', 'seven', 'shall', 'should', 'so', 'struggled', 'take', 'task', 'testing', 'that', 'the', 'their', 'these', 'they', 'this', 'those', 'thus', 'to', 'under', 'unfinished', 'us', 'vain', 'war', 'we', 'what', 'whether', 'which', 'who', 'will', 'work', 'world', 'years']
+
+
+
+Solutuon:
+
+#!/usr/bin/env python3
+
+import sys
+import re
+
+lines = sys.stdin.readlines()
+words = []
+
+for row in lines:
+  row = row.split(" ")
+  i = 0
+  while i < len(row):
+    line = row[i]
+    line = re.sub(r"\W+", "", line).lower()
+    if words.count(line) == 0 and line != "":
+      words.append(line)
+    i += 1
+
+print(len(words))
