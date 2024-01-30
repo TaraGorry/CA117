@@ -1,0 +1,32 @@
+Task:
+Write a program called repcomps_031.py that uses a for loop and 
+the range function to generate a list containing the numbers 
+1, 2, 3, ... , N (Where N is an integer supplied from stdin).
+Use a list comprehension to have you program duplicate the 
+previous list but with all non-multiples of 3 replaced by zero.
+
+HINT:
+You might find useful a function helper(n) that returns n if n is a multiple of 3 and zero otherwise.
+
+Example Input:
+8
+12
+
+Example Output:
+Non-multiples of 3 replaced: [0, 0, 3, 0, 0, 6, 0, 0]
+Non-multiples of 3 replaced: [0, 0, 3, 0, 0, 6, 0, 0, 9, 0, 0, 12]
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+nums = sys.stdin.readlines()
+
+def threes_n_zeros(nums):
+  return [n if n % 3 == 0 else 0 for n in range(1, int(nums) + 1)]
+
+for number in nums:
+  print("Non-multiples of 3 replaced:", threes_n_zeros(numbers))

@@ -1,0 +1,41 @@
+Task:
+Write a program called qnou_031.py that reads words from stdin 
+(one word per line) and stores them all in a list.
+Making appropriate use of a list comprehension and ignoring 
+differences in case, have the program print a list of all words 
+in the list that contain a q that is not immediately followed 
+by a u.
+
+Example Input:
+question
+Colloq
+IQ
+Iraq
+Iraqi
+q
+Qatar
+QED
+q's
+seq
+inquest
+
+Example Output:
+Words with q but no u: ['Colloq', 'IQ', 'Iraq', 'Iraqi', 
+'q', 'Qatar', 'QED', "q's", 'seq']
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+words = [line.strip() for line in sys.stdin]
+
+def qnou(words):
+  w = words.lower()
+  w = replace("qu", "--")
+  return "q" in w
+
+qnou = [w for w in words if qnou(w)]
+print("Words with q but no u:", qnou)

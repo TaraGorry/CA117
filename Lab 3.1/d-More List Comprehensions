@@ -1,0 +1,72 @@
+Task:
+Write a program called wordcomps_031.py that reads words from 
+stdin (one word per line) and stores them all in a list.
+Using list comprehension and ignoring differences in case, 
+have you program print the following lists:
+
+  1. Words that contain exactly 17 letters.
+  2. Words that contain 18+ letters.
+  3. Words that contain four a's.
+  4. Words that contain two or more q's.
+  5. Words that contain the sequence "cie".
+  6. Words that are anagrams of "angle".
+
+HINT:
+When checking of a word should be included in the new list 
+convert it to be lower case for the purposes of the check but 
+add the original word to the list (should it pass the test).
+
+Your program should produce the following output when run 
+against dictionary05.txt:
+
+Words containing 17 letters: ['contradistinguish', 
+'counterproductive', 'counterrevolution', 'electrocardiogram', 
+'indistinguishable', 'paleoanthropology', 'psychotherapeutic', 
+'spectrophotometer']
+Words containing 18+ letters: ['arteriolosclerosis', 
+'counterrevolutionary', 'diethylstilbestrol', 
+'electrocardiograph', 'electroencephalogram', 
+'electroencephalograph', 'electroencephalography', 
+'immunoelectrophoresis', 'triphenylphosphine']
+Words with 4 a's: ['Alabama', 'Alabamian', 'amalgamate', 
+'Anastasia', 'Appalachia', 'Atalanta', 'Athabascan', 
+'baccalaureate', 'bacchanalian', 'Bhagavadgita', 
+'extravaganza', 'Macadamia', 'Madagascar', 'maharaja', 
+'Maharashtra', 'Mahayana', 'Nakayama', 'Panamanian', 
+'Paraguayan', 'paraphernalia', 'parliamentarian', 
+'Santayana', 'sarsaparilla', 'tarantara']
+Words with 2+ q's: ['Albuquerque']
+Words containing cie: ['ancient', 'coefficient', 'concierge',
+ 'conscience', 'conscientious', 'deficient', 'efficient', 
+ 'financier', 'glacier', 'hacienda', 'inefficient', 
+ 'insufficient', 'Muncie', 'omniscient', 'proficient', 
+ 'science', 'scientific', 'scientist', 'societal', 'Societe',
+ 'society', 'specie', 'species', 'sufficient']
+Anagrams of angle: ['angel', 'Galen', 'glean', 'Lange']
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+words = [imput.strip() for imput in sys.stdin]
+
+letters17 = [w for w in words if len(w) == 17]
+print("Words containing 17 letters:", letters17)
+
+letters18_over = [w for w in words if len(w) >= 18]
+print("Words containing 18+ letters:", letters18_over)
+
+foursa = [w for w in words if w.lower().count("a") == 4]
+print("Words with 4 a's:", fouras)
+
+two_or_more = [w for w in words if w.lower().count("q") >= 2]
+print("Words with 2+ q's:", two_or_more)
+
+cies = [w for w in words if "cie" in w.lower()]
+print("Words containing cie:", cies)
+
+angles = [w for w in words if w != "angle" and sorted(w.lower()) == sorted("angle")]
+print("Anagrams of angle:", angle)

@@ -1,0 +1,40 @@
+Task:
+Write a program called primecomps_031.py that uses a for loop 
+and the range() function to generate a list containing the 
+numbers 2, 3, 4, ... , N (Where N is an integer supplied from 
+stdin).
+A prime number is one that is divisible only by itsself and one.
+Use a list conprehension to have you program extract all prime 
+numbers from the above list.
+
+HINT:
+Try to be efficient when looking for factors.
+
+Example Input:
+8
+12
+
+Example Output:
+Primes: [2, 3, 5, 7]
+Primes: [2, 3, 5, 7, 11]
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+numbers = sys.stdin.readlines()
+
+def primes(number):
+  return [n for n in range(2, number + 1) if isPrime(n)]
+
+def isPrime(num):
+  for i in range(2, num):
+    if num % i == 0:
+      return False
+  return True 
+
+for number in numbers:
+  print("Primes:", primes(int(number)))
