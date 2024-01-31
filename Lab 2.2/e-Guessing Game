@@ -1,0 +1,76 @@
+Task:
+Bert and Ernie are playing a gessing game. Bert things of a 
+number between 1 and 20 inclusive and Ernie trys to guess the 
+number.
+For each guess by Ernir, Bert tells him whether he needs to 
+guess "higher", "lower" or is "correct".
+Ernie suspects Bert may be cheating by changing the number 
+during the game.
+Write a program called guess_022.py that reads game logs from 
+stdin and outputs "Bert can be trusted" if the log is consistent 
+and "Bert is not to be trusted" if the log indicates Bert has 
+changed the number mid-game.
+Each log ends with a "correct".
+
+Example Input 1:
+5
+higher
+10
+higher
+18
+lower
+15
+correct
+
+Example Output 1:
+Bert can be trusted
+
+Example Input 2:
+10
+higher
+7
+higher
+16
+lower
+19
+correct
+
+Example Input 2:
+Bert is not to be trusted
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+lines = sys.stdin.read()
+lines = lines.strip().split("\n")
+
+guesses = []
+bertsAnswer = []
+
+for line in lines:
+  if line[:].isdigit():
+    guesses.append(line[:])
+  else:
+    bertsAnswer.append(line[:])
+
+correctAnswer = guesses[-1]
+
+truthBert = True
+i = 0
+while i < len(guesses) - 1:
+  num = guesses[i]
+  answer = bertsAnswer[i]
+  if (answer == "higher") and (int(num) > int(correctAnswer)):
+    truthBert = False
+  elif (answer == "lower") and (int(num) < int(correctAnswer)):
+    truthBert = False
+  i += 1
+
+if truthBert:
+  print("Bert can be trusted")
+else:
+  print("Bert is not to be trusted")
