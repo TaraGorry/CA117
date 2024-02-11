@@ -1,0 +1,76 @@
+Task:
+Write a program calles reversecomp_032.py that reads words from 
+stdin (one word per line) and stores them in a list.
+
+Making use of a list comperhension and ignorning differences 
+in case, have the program print a list of all words that are 
+at least five characters long and whose reverse also occurs 
+in the list.
+
+Your program should produce the following output:
+['Ababa', 'civic', 'Damon', 'Hannah', 'lager', 'leper', 'level', 'lever', 'madam', 'minim', 'nomad', 'radar', 'refer', 'regal', 'repel', 'revel', 'rever', 'rotor', 'tenet']
+
+Note that palindromes will appare in the program output since by definition their reverse is in the list of words.
+
+Note there is a timeout on the program checker that will halt your program if it does not efficiently produce its answer.
+
+You might use binary search over the list of sorted words in order to efficiently solve this problem. Here is some code you might use:
+###
+def binsearch(query, sorted_list):
+
+    '''Return True if query in sorted_list else False'''
+
+    low = 0
+    high = len(sorted_list) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+
+        # print(f'{low} {mid} {high}')
+
+        if sorted_list[mid] < query:
+            # Search RHS
+            low = mid + 1
+
+        elif sorted_list[mid] > query:
+            # Search LHS
+            high = mid - 1
+
+        else:
+            # Found it
+            return True
+
+    # Not found
+    return False
+###
+
+Using a dicitionary or a set to solve the exercise is not premitted.
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+def binSearch(query, sortedList):
+  low = 0
+  high = len(sortedList) - 1
+  while low <= high:
+    mid = (low + high) // 2
+    if sortedList[mid] < query:
+      low = mid + 1
+    elif sortedList[mid] > query:
+      high = mid - 1
+    else:
+      return True
+  return False
+
+lines = []
+linesLower = []
+
+for line in sys.stdin:
+  lines.append(line.strip())
+  linesLower.append(line.lower().strip())
+
+print([c for c in lines if binSearch(c.lower()[::-1], linesLower) and len(c) >= 5])

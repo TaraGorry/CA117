@@ -1,0 +1,49 @@
+Task:
+Write a program called wordcomps_032.py that reads words from 
+stdin (one word per line) and stores them all in a list.
+
+Using list comprehension and ignoring differences in case, 
+have your program print the following:
+
+  - The shortest word that contains all vowels ("aeiou").
+  - A count of all the words that end in "iary".
+  - A list of the words that contain the most e's.
+
+Your program should produce the following output:
+
+Shortest word containing all vowels: Sequoia
+Words ending in iary: 14
+Words with most e's: ['dereference', 'teleconference']
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+words = [w.strip() for w in sys.stdin.readlines()]
+
+def allVowels(w):
+  return "a" in w and "e" in w and "i" in w and "o" in w and "u" in w
+
+allVowelsShortest = [w for w in words if allVowels(w.lower())]
+print(f"Shortest word containing all vowels: {min(allVowelsShortest, key = len)}")
+
+iaryWords = [w for w in words if w.endswith("iary")]
+print(f"Words ending in iary: {len(iaryWords)}")
+
+def mostEs(lines):
+  mostEs = 0
+  words = []
+  for item in lines:
+    eCount = [c for c in item if c == "e"]
+    eNum = len(eCount)
+    if eNum > mostEs:
+      words = words[:0]
+      words.append(item)
+      mostEs = eNum
+    if eNum == mostEs and item not in words:
+      words.append(item)
+  return words
+print(f"Words with most e's: {mostEs(words)}")
