@@ -1,0 +1,74 @@
+Task:
+Write a new version of the previous program called fancy_041.py.
+It functions similarly except contact details consist of two 
+items: a phone number and an email address.
+
+For example, after cinstruction a dictionary from fancy_input_00_041.txt your program should produce the output below when reading from fancy_stdin_00_041.txt:
+
+cat fancy_input_00_041.txt
+Sue 085-6442378 sue@eircom.net
+Jimmy 086-1223277 james@apple.com
+Maggie 087-8822001 maggie@microsoft.com
+Amy 087-3240516 amy@rte.ie
+Wendy 086-9112645 wendy@physics.dcu.ie
+Sean 085-3445123 sean@tcd.ie
+
+cat fancy_stdin_00_041.txt
+Jimmy
+Sue
+Sean
+Gwen
+Wendy
+Tommy
+Maggie
+Amy
+
+python3 fancy_041.py fancy_input_00_041.txt < fancy_stdin_00_041.txt
+Name: Jimmy
+Phone: 086-1223277
+Email: james@apple.com
+Name: Sue
+Phone: 085-6442378
+Email: sue@eircom.net
+Name: Sean
+Phone: 085-3445123
+Email: sean@tcd.ie
+Name: Gwen
+No such contact
+Name: Wendy
+Phone: 086-9112645
+Email: wendy@physics.dcu.ie
+Name: Tommy
+No such contact
+Name: Maggie
+Phone: 087-8822001
+Email: maggie@microsoft.com
+Name: Amy
+Phone: 087-3240516
+Email: amy@rte.ie
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+with open(sys.argv[1], "r") as f:
+  contacts = f.read()
+  contacts = contacts.split()
+
+contact = {}
+
+for i in range(0, len(contacts), 3):
+  contact[contacts[i]] = contacts[i + 1 : i + 3]
+
+for name in sys.stdin:
+  name = name.strip()
+  if name in contact:
+    print(f"Name: {name}")
+    print(f"Phone: {contact[name][0]}")
+    print(f"Email: {contact[name][1]}")
+  else:
+    print(f"Name: {name}")
+    print("No such contact")

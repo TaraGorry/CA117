@@ -1,0 +1,87 @@
+Task:
+Runners run some arbitary number of races (at least one) in a
+season.
+
+Write a program called race_041.py that reads runners' race 
+times for the season from stdin.
+
+Each line read from stdin is structured as follows:
+  Renner's_name time_1 time_2 time_3...
+
+Each name is a single string.
+
+Each time is in the form minutes:seconds.
+
+Your program must print the name of the runner with the best 
+race time over the course of the season along with that time 
+(you may assume there will always be a clear winner).
+
+Should any of the times be invalid that the corresponding runner 
+should be ignored.
+
+For example:
+
+cat race_stdin_00_041.txt
+Rachel 8:12 8:32 8:00 7:12 8:09
+Fred 11:12 11:13 11:14 11:14 11:10
+Naomi 8:45 9:01 10:11 8:18 9:00
+Jimmy 8:12 8:2b 8:19 7:13 10:11
+Ned 7:34 7:00 6:45 7:19 7:01
+
+python3 race_041.py < race_stdin_00_041.txt
+Ned : 6:45
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+def formatTime(timeStr):
+  split = timeStr.split(":")
+  if len(split) != 2:
+    return None
+
+  try:
+    minutes = int(split[0])
+    seconds = int(split[1])
+    
+    if seconds < - or seconds >= 60 or minutes < 0:
+      return None
+    
+    return minutes * 60 + seconds
+
+  except ValueError:
+    return None
+
+bestTime = float("inf")
+bestRunner = None
+
+for line in sys.stdin:
+  info = line.strip().split()
+  runner = info[0]
+  raceTimes = info[1:]
+
+  validTimes = []
+
+  for timeStr in raceTimes:
+    time = formatTime(timeStr)
+
+    if time is None:
+      break
+    validTime.append(time)
+
+  validTime = [time for time in validTimes if time is not None]
+
+  if validTimes:
+    minTime = min(validTimes)
+    
+    if minTime < bestTime:
+      bestTime = minTime
+      bestRunner = runner
+
+if best Runner in not None:
+  minutes = bestTime // 60
+  seconds = bestTime % 60
+  print(f"{bestRunner} : {int(minutes)}:{seconds:02d}")

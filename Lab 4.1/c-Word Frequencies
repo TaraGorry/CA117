@@ -1,0 +1,78 @@
+Task:
+Write a program called words_041.py that calculates the frequency 
+of words in lines of text read from stdin.
+
+Your program muct store the totals as values in a dictionary 
+where the corresponding words are keys.
+
+Once totals have been calculated the program should print all 
+words in alphabetical order along with corresponding totals.
+
+Hints:
+1. Convert all words to lower case. "A" and "a" should not be 
+counted as separate words.
+
+2. Remember to strip any surrounding punctuation from words.
+You may find string.punctuation useful for this task.
+
+3. Use the sorted() function for sorting.
+
+For example:
+
+cat words_stdin_00_041.txt
+This is a test. And a test is this.
+How many tests are required to prove something?
+I wonder if there is something wrong with my code...?
+I shouldn't worry. I'll sort it in the end.
+
+python3 words_041.py < words_stdin_00_041.txt
+a : 2
+and : 1
+are : 1
+code : 1
+end : 1
+how : 1
+i : 2
+i'll : 1
+if : 1
+in : 1
+is : 3
+it : 1
+many : 1
+my : 1
+prove : 1
+required : 1
+shouldn't : 1
+something : 2
+sort : 1
+test : 2
+tests : 1
+the : 1
+there : 1
+this : 2
+to : 1
+with : 1
+wonder : 1
+worry : 1
+wrong : 1
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+wordCount = {}
+
+for line in sys.stdin:
+    tokens = line.strip().lower().replace(".", "").replace("?", "").split()
+    
+    for word in tokens:
+        if word not in wordCount:
+            wordCount[word] = 1
+        else: wordCount[word] = wordCount[word] + 1
+
+for w, c in sorted(wordCount.items()):
+    print(f"{w} : {c}")
+

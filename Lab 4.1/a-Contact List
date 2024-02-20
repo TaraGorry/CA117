@@ -1,0 +1,74 @@
+Task:
+Write a program called contacts_041.py that takes the name of 
+a file of contacts as a single command line argument. Each 
+line of the contacts file consists of a name and phone number.
+
+Your program must read each contact and store if in a dictionary.
+The dictionary's keys are names and the dictionary's values are the corresponding phone numbers.
+
+Once the dictionary has been constructed the program should read all lines from stdin. Each line consists of a single name.
+
+For each name the program should retieve and print the corresponding phone number. If a name connot be mapped to a phone number the program should print "No such contact".
+
+For example, after construction a dictionary from contacts_input_00_041.py your program should produce the output below when reading from contacts_stdin_00_041.txt:
+
+cat contacts_input_00_041.txt
+Sue 085-6442378
+Jimmy 086-1223277
+Maggie 087-8822001
+Amy 087-3240516
+Wendy 086-9112645
+Sean 085-3445123
+
+cat contacts_stdin_00_041.txt
+Jimmy
+Sue
+Sean
+Gwen
+Wendy
+Tommy
+Maggie
+Amy
+
+python3 contacts_041.py contacts_input_00_041.txt < contacts_stdin_00_041.txt
+Name: Jimmy
+Phone: 086-1223277
+Name: Sue
+Phone: 085-6442378
+Name: Sean
+Phone: 085-3445123
+Name: Gwen
+No such contact
+Name: Wendy
+Phone: 086-9112645
+Name: Tommy
+No such contact
+Name: Maggie
+Phone: 087-8822001
+Name: Amy
+Phone: 087-3240516
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+with open(sys.argv[1], "r") as f:
+  contacts = f.read()
+  contacts = contacts.split()
+
+contact = {}
+
+for i in range(0, len(contacts), 2):
+  contact[contacts[i]] = contacts[i + 1]
+
+for name in sys.stdin:
+  name = name.strip()
+  if name in contact:
+    print(f"Name: {name}")
+    print(f"Phone: {contact[name]}")
+  else:
+    print(f"Name: {name}")
+    print("No such contact")

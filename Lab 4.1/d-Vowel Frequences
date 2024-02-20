@@ -1,0 +1,58 @@
+Task:
+Write a program called vowels_041.py that calculates the frequency 
+of the vowels a, e, i, o, u in lines of text read from stdin.
+
+Your program must store the totals as values in a dictionary 
+where the corresponding vowels are the keys.
+
+When run against gittysburg.txt your program should produce
+the following output (not the output must be neatly tabulated and values must be in decending order):
+
+python3 vowels_041.py < gettysburg.txt
+e : 167
+a : 105
+o :  95
+i :  69
+u :  21
+
+Hints:
+
+  1. Convert all vowels to lower case. "A" and "a" should not be counted as separate vowels.
+
+  2. Printing the dictionary items in order of decreasing values is tricky. You will most likely have to study the documentation for the sorted() function.
+
+  3. Note how the output must be neatly tabulated. Remember that to print an integer x to a given width w you can use something like:
+    
+    print(f"{x:{w}}")
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+vowelCount = {}
+vowels = "aeiou"
+
+for line in sys.stdin:
+  tokens = line.strip().lower().split()
+
+  for word in tokens:
+    
+    for letter in word:
+      
+      if letter in vowels:
+        
+        if letter not in vowelCount:
+          vowelCount[letter] = 1
+        else:
+          vowelCount[letter] = vowelCount[letter] + 1
+
+maxVwidth = len(str(max(vowelCount.values())))
+
+def trigger(item):
+  return item[1]
+
+for k, v in sorted(vowelCount.items(), key = trigger, reverse = True):
+  print(f"{k} : {v :>{maxVwidth}d}")
