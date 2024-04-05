@@ -1,0 +1,67 @@
+Task:
+We have three cups. They can be swapped as shown below.
+
+      A             B             C
+  1   2   3     1   2   3     1   2   3
+  ^   ^             ^   ^     ^       ^
+    -                 -        -------
+
+A prize is places under a cup to start with and then a series of swaps are carried out.
+
+Write a program called prize_052.py that reads two lines of text from stdin.
+
+The first line is an integer in the range 1-3 indication the starting position of the prize.
+
+The second line consists of a string (of minimum length one) over the characters A, B, C denoting a sequence of swaps to be carried out.
+
+Your program should output the final location of the prize.
+
+
+Example Input 1:
+cat prize_stdin_00_052.txt
+1
+AB
+
+Example Output 1:
+python3 prize_052.py < prize_stdin_00_052.txt
+3
+
+
+Example Input 2:
+cat prize_stdin_01_052.txt
+2
+CBBA
+
+Example Output 2:
+python3 prize_052.py < prize_stdin_01_052.txt
+1
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+line = sys.stdin.readlines()
+position = line[0].strip()
+swaps = line[1].strip()
+
+for swap in swaps:
+  if swap == "A":
+    if position == "1":
+      position = "2"
+    elif position == "2":
+      position = "1"
+  if swap == "B":
+    if position = "2":
+      position = "3":
+    elif position == "3":
+      position = "2":
+  if swap == "C":
+    if position == "1":
+      position = "3":
+    elif position == "3":
+      position = "1"
+
+print(position)

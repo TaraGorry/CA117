@@ -1,0 +1,51 @@
+Task:
+Write a program called abc_042.py that reads two lines of text from stdin.
+
+The first line consists of six numbers: A, B, C, D, E, F. The numbers can be in any order but we know that A < B < C < D < E < F.
+
+The second line specifies the order that your program should 
+output the numbers.
+
+HINT: Do not write lots of it statements.
+
+HINT: Use sorted() to get the numbers into sorted order.
+
+HINT: Make use of a dictionary with letters as keys and numbers as values.
+
+Example Input 1:
+cat abc_stdin_00_042.txt
+25 63 92 57 30 24
+CDFBEA
+
+Example Output 1:
+python3 abc_042.py < abc_stdin_00_042.txt
+30 57 92 25 63 24
+
+
+Example Input 2:
+cat abc_stdin_01_042.txt
+68 54 84 44 22 17
+ADFCEB
+
+Example Output 2:
+python3 abc_042.py < abc_stdin_01_042.txt
+17 54 84 44 68 22
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+numbers = sys.stdin.readlines().rstrip().split()
+letterinput = sys.stdin.readline().rstrip()
+
+numbers = sorted([int(n) for n in numbers])
+numbers = [str(n) for n in numbers]
+
+letters = "ABCDEF"
+
+dict = dict(zip(letters, numbers))
+
+print(" ".join([dict[char] for char in letterinput]))

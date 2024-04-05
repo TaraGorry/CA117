@@ -1,0 +1,50 @@
+Task:
+Write a Python program calles nums2words_v2_042.py that maps 
+lines of numbers to corresponding lines of text. The lines of 
+numbers are read from stdin. The number of lines is arbitrary.
+
+This time the data read from stdin can include integers outside of the range [0-10]. Every number in the rangs [0-10] should be mapped to corresponding text. Everything else however should be mapped to "unknown".
+
+
+Example Input:
+
+cat nums2words_v2_stdin_00_042.txt
+5 1 2 33 6 7 99 10 8 8 3 12
+14 3 9 8 2 6 3 0 -1 7 1 9 11
+
+Example Output:
+
+python3 nums2words_v2_042.py < nums2words_v2_stdin_00_042.txt
+five one two unknown six seven unknown ten eight eight three unknown
+unknown three nine eight two six three zero unknown seven one nine unknown
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+nums2word = {
+    0:"zero",
+    1:"one",
+    2:"two",
+    3:"three",
+    4:"four",
+    5:"five",
+    6:"six",
+    7:"seven",
+    8:"eight",
+    9:"nine",
+    10:"ten"
+}
+
+def maps(num):
+  if num not in num2word:
+    return "unknown"
+  return num2word[num]
+
+for num in sys.stdin:
+  tokens = num.strip().split()
+  output = [maps(int(n)) for n in tokens]
+  print(" ".join(output))

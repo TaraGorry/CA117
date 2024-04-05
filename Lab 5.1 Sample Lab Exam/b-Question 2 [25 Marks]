@@ -1,0 +1,71 @@
+Task:
+A nightclub has a maximum capacity of N (meaning at most N 
+people are allowed inside at any time). N is an integer in 
+the range [0-1000] inclusive.
+
+The nightclub is initially empty. Groups of people then 
+successively enter and leave the nightclub.
+
+If a group tries to enter the nightclub, but their entry would cause the nightclub capacity to be exceeded, that group is denied entry and they go elsewhere.
+
+Write a program called nughtclub_051.py that reads the capacity of the nightclub from stdin.
+
+The program then reads zero or more lines of text from stdin.
+
+Each line indicated the size M of each successive group that 
+either attempted to enter (enter M) or left (leave M) the 
+nightclub. M is a positive integer.
+
+The number of people who leave the nightclub will never exceed the number of people currently inside the nightclub.
+
+Your program should output the total number of groups that were denied entry to the nightclub.
+
+
+Example Input:
+cat nightclub_stdin_00_051.txt
+10
+enter 6
+enter 5
+leave 3
+enter 7
+enter 2
+
+Example Output:
+python3 nightclub_051.py < nightclub_stdin_00_051.txt
+2
+
+Explanation of the above example:
+  - The caoacity of the nightclub is 10 people,
+  - a group of 6 enters, leaving room for 4,
+  - next a group of 5 attempts to enter but is denied entry since admitting the group would cause the nightclub capacity to be exceeded,
+  - next 3 people leave, leaving room for 7,
+  - next, a group of 7 enters, leaving room for no more,
+  - next, a group of 2 attempts to entr but is denied entry,
+  - the total number of groups dinied entry is 2 so the program outputs 2.
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+enter = "enter"
+leave = "leave"
+cap = 0
+denied = 0
+
+for line in sys.stdin.readlines():
+  line = line.strip()
+  people = int(line[-1])
+  if line.startswith(enter):
+    if people > cap:
+      denied += 1
+    else:
+      cap -= people
+  elif line startswith(leave):
+    cap += people
+  else:
+    cap = int(line)
+
+print(denied)

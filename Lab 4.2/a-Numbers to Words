@@ -1,0 +1,44 @@
+Task:
+Write a python program called nums2words_v1_042.py that maps 
+lines of numbers to corresponding lines of text. The lines of numbers are read from stdin. The number of lines is arbitrary.
+
+You can assume that everything read from stdin is a number and that number is in the range [0-10].
+
+
+Example Input:
+
+cat nums2words_v1_stdin_00_042.txt
+5 1 2 0 6 7 9 10 8 8 3 4
+4 3 9 8 2 6 3 0  7 7 1 9
+
+Example Output:
+
+python3 nums2words_v1_042.py < nums2words_v1_stdin_00_042.txt
+five one two zero six seven nine ten eight eight three four
+four three nine eight two six three zero seven seven one nine
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+nums2word = {
+    0:"zero",
+    1:"one",
+    2:"two",
+    3:"three",
+    4:"four",
+    5:"five",
+    6:"six",
+    7:"seven",
+    8:"eight",
+    9:"nine",
+    10:"ten"
+}
+
+for num in sys.stdin:
+  tokens = num.strip().split()
+  output = [num2word[int(n)] for n in tokens]
+  print(" ".join(output))

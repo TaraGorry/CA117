@@ -1,0 +1,52 @@
+Task:
+Consider a positive integer X. Muliplying its non-zero digits produces another integer Y. Repeating this process, we eventually arrive at a single digit between 1 and 9.
+
+Write a program called product_051.py that reads X from stdin and outputs the results from the above process.
+
+You can assume X is in the range 1-10000.
+
+
+In this example, we start with 707. Repeatedly multiplying the non-zero digits we get 7 x 7 = 49, 4 x 9 = 36, 3 x 6 = 18 and 1 x 8 = 8. We are done since 8 is in the range 1-9 and we output 8.
+
+cat product_stdin_00_051.txt
+707
+
+python3 product_051.py < product_stdin_00_051.txt
+8
+
+
+In this example, we start with 50. the only non-zero digit in 50 is 5. The product in this case is the digit itself so we output 5.
+
+cat product_stdin_01_051.txt
+50
+
+python3 product_051.py < product_stdin_01_051.txt
+5
+
+
+In this example, we start with 25. 2 x 5 = 10 and the product of the non-zero digits in 10 is 1 so we output 1.
+
+cat product_stdin_02_051.txt
+25
+
+python3 product_051.py < product_stdin_02_051.txt
+1
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+number = sys.stdin.readline()
+number = number.strip()
+
+while len(number) != 1:
+  endNum = 1
+  for eachNum in number:
+    if int(eachNum) != 0:
+      endNum *= int(eachNum)
+  number = str(endNum)
+
+print(number)

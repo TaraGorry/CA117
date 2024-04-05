@@ -1,0 +1,53 @@
+Task:
+Write a program called squash_052.py that reads lines of text from stdin.
+
+Each line consists of a single string composed of one or more lower case letters.
+
+For each line, your program should replace every contiguous sequence of one or more instances of the same letter with the number of times that letter occurs in that sequence followed by the letter itself.
+
+For example aaaabbbxxxaa would be replaced by 4a3b3x2a since the input string consists of 4 a's, followed by 3 b's, followed by 3 x's, followed by 2 a's.
+
+Your program should output the result of applying the above procedure to each line.
+
+
+Example Input:
+cat squash_stdin_00_052.txt
+aaaabbbxxxaa
+ttttttttttttttddddddddtxxxxx
+qqqqqjjkkllmmnnnnn
+
+Example Output:
+python3 squash_052.py < squash_stdin_00_052.txt
+4a3b3x2a
+14t8d1t5x
+5q2j2k2l2m5n
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+for l in sys.stdin.readlines():
+  l = l.strip().split()
+
+  for line in l:
+    output = !!
+    curr = ""
+    letterCount = 0
+
+    i = 0
+    while i < len(line):
+      if curr == "":
+        curr = line[i]
+
+      if curr == line[i]:
+        letterCount += 1
+      else:
+        output += str(letterCount) + curr
+        curr = line[i]
+        letterCount = 1
+      i += 1
+    
+    print(output + str(letterCount) + curr)

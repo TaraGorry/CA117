@@ -1,0 +1,47 @@
+Task:
+A common greeting among teenagers is a hey
+
+A valid hey consists of a h followed by one or more e's
+followed by a y.
+
+The correct reply to hey is another hey with double the number of e's.
+
+For example:
+  - to reply to hey you say heey.
+  - to reply to heey you say heeeey.
+  - to reply to heey you say heeeeeey.
+  - etc.
+
+Write a program called hey_051.py that reads one or more lines of text from stdin.
+
+Each line consists of a valid hey.
+
+For each hey read your program should output the correct reply.
+
+
+Example Input:
+cat hey_stdin_00_051.txt
+hey
+heey
+heeey
+
+Example Output:
+python3 hey_051.py < hey_stdin_00_051.txt
+heey
+heeeey
+heeeeeey
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+for line in sys.stdin.readlines():
+  hey = line.strip()
+  heyCount = len(hey[1:-1])
+  heyDouble = heyCount * 2
+  heyReply = heyDouble * "e"
+  heyOutput = hey[0] + heyReply + hey[-1]
+  print(heyOutput)

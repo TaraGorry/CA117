@@ -1,0 +1,59 @@
+Task:
+At various points along a car's route we record for how long the car has been travelling (T hours) and how far it is from the starting point (D miles).
+
+Write a program called speed_051.py that reads from stdin a sequence of T and corresponding D measurements (one pair per line).
+
+Your program should output the maximum speed (rounded down to the nearest integer) reached by the car across all intervals.
+
+Note that:
+  
+  Speed = distance / time
+
+You can assume that at least two pairs of measurements will be supplied and the first one will always be 0 0 (i.e. at time zero the car was zero miles from the start). All supplied measurements will be integers.
+
+
+Example Input 1:
+cat speed_stdin_00_051.txt
+0 0
+7 42
+
+Example Output 1:
+python3 speed_051.py < speed_stdin_00_051.txt
+6
+
+Example Input 2:
+cat speed_stdin_01_051.txt
+0 0
+5 24
+10 98
+15 222
+20 396
+
+Example Output 2:
+python3 speed_051.py < speed_stdin_01_051.txt
+34
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+line = sys.stdin.readline()
+line = line.strip().split()
+
+time = int(line[0])
+distance = int(line[-1])
+
+for lines in sys.stdin.readlines():
+  lines = lines.strip().split()
+  time2 = int(lines[0])
+  distance2 = int(lines[-1])
+  totalTime = time2 - time
+  totalDistance = distance2 - distance
+  totalSpeed = totalDistance // totalTime
+  time = time2
+  distance = distance2
+
+print(totalSpeed)

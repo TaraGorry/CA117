@@ -1,0 +1,35 @@
+Task:
+Write a Python module swap_042.py that defines a frunction 
+called swap_keys_values(). The function accepts a single 
+argument: a dictionary d.
+
+The function must return a new dictionary whose keys are the 
+values in d and whose values are the corresponding keys in d.
+
+You may assume that all values of d are unique and immutable.
+
+
+Example:
+#!/usr/bin/env python3
+
+from swap_042 import swap_keys_values
+
+def main():
+
+    my_dict = {'a' : 4, 'b' : 7, 'c' : 10}
+    new_dict = swap_keys_values(my_dict)
+    print(sorted(new_dict.items()))
+
+if __name__ == '__main__':
+    main()
+
+Output:
+[(4, 'a'), (7, 'b'), (10, 'c')]
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+def swap_keys_values(d):
+    return dict((v,k) for k,v in d.items())

@@ -1,0 +1,53 @@
+Task:
+A pangram is a phrase that includes at least one occurrence of each of the 26 letters, a-z.
+
+Write a program called pangram_052.py that reads lines of text from stdin.
+
+For each line of text read the program should print pangram if that line is a pangram.
+
+If a line of text is not a pangram the program should print which letters are missing (i.e. those required to make it a pangram). These should be printed in lowercase and in increasing alphabetical order.
+
+A letter occurs in the line of text if it occurs in either upper or lower case.
+
+You can assume each line contains 1-100 characters.
+
+
+Example Input:
+cat pangram_stdin_00_052.txt
+The quick brown fox jumps over the lazy dog.
+ThE QUICK brown fox jumps oVer the lazy dog.
+ZYXW, vu TSR Ponm lkj ihgfd CBA.
+.,?!'" 92384 abcde FGHIJ
+
+Example Output:
+python3 pangram_052.py < pangram_stdin_00_052.txt
+pangram
+pangram
+missing eq
+missing klmnopqrstuvwxyz
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+pangram = "abcdefghijklmnopqrstuvwxyz"
+
+for line in sys.stdin:
+  line = line.strip().spliy()
+  word = ""
+  for lineWord in line:
+    lineWord = lineWord.lower()
+    word += lineWord
+  
+  missing = ""
+  for letter in pangram:
+    if letter not in word:
+      missing += letter
+
+  if missing == "":
+    print("pangram")
+  else:
+    print("missing " + missing)

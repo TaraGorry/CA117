@@ -1,0 +1,37 @@
+Task:
+Write a Python program called nums2words_v4_042.py that maps 
+lines of numbers to corresponding lines of text. The lines of numbers are read from stdin. The number of lines is arbitrary.
+
+You can assume that everything read from stdin is a number that is in the range [0-100].
+
+
+Example Input:
+cat nums2words_v4_stdin_00_042.txt
+5 11 22 0 66 17 99 100 18 68 73 44
+4 35 91 83 27 66 30 0 71 17 16 91
+
+Example Output:
+python3 nums2words_v4_042.py < nums2words_v4_stdin_00_042.txt
+five eleven twenty-two zero sixty-six seventeen ninety-nine one hundred eighteen sixty-eight seventy-three forty-four
+four thirty-five ninety-one eighty-three twenty-seven sixty-six thirty zero seventy-one seventeen sixteen ninety-one
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+nums2word = {
+    0:"zero", 1:"one", 2:"two", 3:"three", 4:"four", 5:"five", 6:"six", 7:"seven", 8:"eight", 9:"nine" 10:"ten", 11:"eleven", 12:"twelve", 13:"thirteen", 14:"fourteen", 15:"fifteen", 16:"sixteen", 17:"seventeen", 18:"eighteen", 19:"nineteen", 20:"twenty", 30:"thirty", 40:"forty", 50:"fifty", 60:"sixty", 70:"seventy", 80:"eighty", 90:"ninety", 100:"one hundred"
+}
+
+def maps(num):
+  if num <= 20 or num == 100:
+    return num2word[num]
+  return num2word[num // 10 * 10] + ("-" + num2word[num % 10] if num % 10 != 0 else "")
+
+for line in sys.stdin:
+  tokens = line.strip().split()
+  output = [maps(int(n)) for n in tokens]
+  print(" ".join(output))
