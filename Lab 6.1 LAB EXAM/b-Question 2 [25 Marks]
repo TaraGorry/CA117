@@ -1,0 +1,75 @@
+Task:
+Write a program called towers_061.py that reads a single line of text from stdin.
+
+The line consists of one or more positive integers separated by white space.
+
+Each integer represents the width of a brick. Bricks are processed in the order they are listed.
+
+The first brick represents the base of the first tower.
+
+In general, brick k + 1 can be places on to of brick k if the width of brick k + 1 is not greater than the width of brick k.
+
+If brick k + 1 cannot be places on top of brick k then brick k + 1 becomes the base of a new tower.
+
+Given a sequence of brick widths your program muct output the number of towers constructed.
+
+
+Example Input 1:
+cat towers_stdin_00_061.txt
+4 3 3 2 1 2 2 1 1 3
+
+Example Output 1:
+python3 towers_061.py < towers_stdin_00_061.txt
+3
+
+Graphical explanation of the above example:
+cat towers_explanation_00_061.txt
+*
+**        *
+***       *
+***       **
+****      **        ***
+Tower 1   Tower 2   Tower 3
+
+
+Example Input 2:
+cat towers_stdin_01_061.txt
+2 2 2 2 2
+
+Example Output 2:
+python3 towers_061.py < towers_stdin_01_061.txt
+1
+
+Graphical explanation of the above example:
+cat towers_explanation_01_061.txt
+**
+**
+**
+**
+**
+Tower 1
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+def count_towers(bricks):
+  towers = 0
+  prev_width = float("inf")
+
+  for brick in bricks:
+    if brick > prev_width:
+      towers += 1
+    prev_width = brick
+
+  return towers + 1
+
+line = sts.stdin.readlin().strip()
+bricks = list(map(int, line.split()))
+
+towers = count_towers(bricks)
+
+print(towers)

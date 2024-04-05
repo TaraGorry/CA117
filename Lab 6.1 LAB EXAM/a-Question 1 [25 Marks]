@@ -1,0 +1,37 @@
+Task:
+Write a program called tiger_061.py that reads one or more lines of text from stdin.
+
+Each line consists of one or more "|" bars, followed by the string tiger, follower by one or more "|" bars.
+
+For each line read your progra, should output safe if the number of bars before tiger is equal to the number of bars after tiger. Otherwise your program should output unsafe.
+
+
+Example Input:
+cat tiger_stdin_00_061.txt
+|||tiger|||
+|||tiger||
+
+Example Output:
+python3 tiger_061.py < tiger_stdin_00_061.txt
+safe
+unsafe
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+def check_tiger(line):
+  before_tiger = line.count("|", 0, line.index("tiger"))
+  after_tiger = line.count("|", line.index("tiger") + len("tiger"))
+  return before_tiger == after_tiger
+
+for line in sys.stdin:
+  line - line.strip()
+  if "tiger" in line:
+    if check_tiger(line):
+      print("safe")
+    else:
+      print("unsafe")

@@ -1,0 +1,59 @@
+Task:
+Write a program called roots_062.py that reads a, b, and c from 
+stdin (one set per line) and passes them to a function that 
+computes and returns the coresponding roots.
+
+Should real roots exist, print them in ascending order to one 
+decimal place.
+
+Should no real root exists, print None.
+
+
+Example Input:
+cat roots_stdin_00_062.txt
+1 0 -1
+1 1 -2
+1 1 2
+1 2 1
+1 6 5
+1 5 6
+2 -2 -12
+
+Example Output:
+python3 roots_062.py < roots_stdin_00_062.txt
+-1.0, 1.0
+-2.0, 1.0
+None
+-1.0, -1.0
+-5.0, -1.0
+-3.0, -2.0
+-2.0, 3.0
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+import math
+
+def compute_roots(a, b, c):
+  discriminant = b ** 2 - 4 * a * c
+  if discriminant < 0:
+    return None
+  elif discriminant == 0:
+    root = -b / (2 * a)
+    return root, root
+  else:
+    root1 = (-b + math.sqrt(discriminant)) / (2 * a)
+    root2 = (-b - math.sqrt(discriminant)) / (2 * a)
+    return min(root1, root2), max(root1, root2)
+
+for line in sys.stdin:
+  a, b, c = map(int, line.strip().split())
+  roots = compute_roots(a, b, c)
+  if roots is None:
+    print("None")
+  else:
+    root1, root2 = roots
+    print("{:.1f}, {:.1f}".format(root1, root2))

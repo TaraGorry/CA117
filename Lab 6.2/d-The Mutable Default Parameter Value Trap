@@ -1,0 +1,53 @@
+Task:
+The behaviour of the code below is not as the programmer intended.
+
+Identify and make sure you understand the proble,.
+
+Fix the append2list() function. Put it in mutable_062.py and submit it to Einstein.
+
+
+Example:
+#!/usr/bin/env python3
+
+# Append l1 to l2. If l2 not supplied default to empty list.
+def append2list(l1, l2=[]):
+    for i in l1:
+        l2.append(i)
+    return l2
+
+def main():
+    list1 = ['fly', 'spider']
+    nlist = append2list(list1)
+    # nlist should be ['fly', 'spider']
+    print(nlist)
+
+    list2 = ['lion']
+    nlist = append2list(list2, ['antelope'])
+    # nlist should be ['antelope', 'lion']
+    print(nlist)
+
+    list3 = ['fox', 'chicken']
+    nlist = append2list(list3)
+    # nlist should be ['fox', 'chicken']
+    print(nlist)
+
+
+if __name__ == '__main__':
+    main()
+
+
+['fly', 'spider']
+['antelope', 'lion']
+['fly', 'spider', 'fox', 'chicken']
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+def append2list(l1, l2=None):
+  if l2 is None:
+    l2 = []
+  for i in l1:
+    l2.append(i)
+  return l2

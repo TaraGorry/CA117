@@ -1,0 +1,78 @@
+Task:
+The divisors of a positive integer n are the positive integers that exactly divide n.
+
+In module perfect_062.py, define a function get_divisors() which takes a positive integer parameter n and returns its divisors, sorted from low to high in a Python list.
+
+For example, get_divisord(12) should return [1, 2, 3, 4, 6, 12].
+
+The proper divisors of a positive integer n are all of its divisors apart from n itself.
+
+Add to perfect_062.py a function get_proper_divisors() which takes a positive integer parameter n and returns its proper divisors, sorted from low to high, in a Python list. (Make sure this function makes use of get_divisors().)
+
+A positive integer is perfect if it is equal to the sum of its proper divisors.
+
+For example, 28 is perfect because its proper divisors are 1, 2, 4, 7 and 14 and these sum to 28.
+
+Add to perfect_062.py a boolean-valued function is_perfect() which returns True if its positive integer parameter n is perfect and False otherwise. (Make sure this function makes use of get_proper_divisors().)
+
+
+Example Input:
+#!/usr/bin/env python3
+
+from perfect_062 import get_divisors, get_proper_divisors, is_perfect
+
+def main():
+
+    print(get_divisors(6))
+    print(get_proper_divisors(6))
+    print(is_perfect(6))
+
+    numbers = [1, 2, 3, 4, 5, 6, 28, 496, 8128, 8129]
+
+    for n in numbers:
+        print(is_perfect(n))
+
+
+if __name__ == '__main__':
+    main()
+
+
+Example Output:
+[1, 2, 3, 6]
+[1, 2, 3]
+True
+False
+False
+False
+False
+False
+True
+True
+True
+True
+False
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+def get_divisors(number):
+  s = []
+  for n in range(number):
+    n += 1
+    if number % n == 0:
+      s.append(n)
+  return s
+
+def get_proper_divisors(number):
+  s = get_divisors(number)
+  s.pop()
+  return s
+
+def is_perfect(number):
+  s = get_proper_divisors(number)
+  if sum(s) == number:
+    return True
+  else:
+    return False

@@ -1,0 +1,49 @@
+Task:
+A magic number is a positive integer that is evenly divisible by the sum of its digits.
+
+For example, 24 is a magic number because 24 is evenly divisible by 6 (2 + 4).
+
+For example, 25 is not a magic number because 25 is not evenly divisible by 7 (2 + 5).
+
+Write a program called magic_061.py that reads a single positive integer N from stdin.
+
+Your program should output the smallest magic number M such that M >= N.
+
+
+Example Input 1:
+cat magic_stdin_00_061.txt
+25
+
+Example Output 1:
+python3 magic_061.py < magic_stdin_00_061.txt
+27
+
+
+Example Input 2:
+cat magic_stdin_01_061.txt
+987654321
+
+Example Output 2:
+python3 magic_061.py < magic_stdin_01_061.txt
+987654330
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+def is_magic_number(num):
+    return num % sum(int(digit) for digit in str(num)) == 0
+
+def find_smallest_magic_number(N):
+    while True:
+        if is_magic_number(N):
+            return N
+        N += 1
+
+N = int(sys.stdin.readline().strip())
+smallest_magic = find_smallest_magic_number(N)
+
+print(smallest_magic)

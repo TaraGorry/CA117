@@ -1,0 +1,72 @@
+Task:
+A tourist has visited various countries over the years. Some countries they have visited more than once.
+
+For any tourist we have a record of each country they have visited and the year in which they visited. These records are in random order.
+
+Write a program called tourist_061.py that will output in which year a tourist visited country C for the Kth time.
+
+Input is read from stdin.
+
+The first line contains integer N, the number of records, where, N >= 1.
+
+The folloing N lines each consist of an arbitrary country name (all country names consists of a single word) followed by an arbitrary four-digit year (indicating the tourist visited that country in that year).
+
+The final line containc C and K. (You can assume the tourist visited country at least K times.)
+
+
+Example Input 1:
+cat tourist_stdin_00_061.txt
+6
+Germany 1982
+Ireland 2016
+Vietnam 1999
+Ireland 1982
+Ireland 1989
+Germany 2015
+Ireland 2
+
+Example Output 1:
+python3 tourist_061.py < tourist_stdin_00_061.txt
+1989
+
+The output above indicates this tourist visisted Ireland for the second time in 1989.
+
+
+Example Input 2:
+cat tourist_stdin_01_061.txt
+5
+Ireland 2000
+France 1987
+Italy 1990
+France 1990
+France 1985
+Italy 1
+
+Example Output 2:
+python3 tourist_061.py < tourist_stdin_01_061.txt
+1990
+
+The output above indicates this tourist visited Italy for the first time in 1990.
+
+
+Solution:
+
+import sys
+
+def find_visit_year(records, country, k):
+  visit_years = []
+  for record_country, year in records:
+    if record_country == country:
+      visit_years.append(year)
+  visit_years.sort()
+  return visit_years[k - 1]
+
+N = int(sys.stdin.readline().strip())
+records = [sys.stdin.readline().strip().split()]
+C, K = sys.stdin.readline().strip().split()
+C = int(C)
+K = int(K)
+
+visit_year = find_visit_year(records, C, K)
+
+print(visit_year)

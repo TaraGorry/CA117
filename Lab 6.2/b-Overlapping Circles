@@ -1,0 +1,47 @@
+Task:
+In module circle_062.py, define a function that returns True if two circles overlap and False otherwise.
+
+A circle is defined by its center's x and y coordinates and its radius.
+
+Your overlap function should take six parameters in the following order: x1, y1, r1, x2, y2, r2 (you must use there parameter names and in the specified order when defining your fucntion).
+
+By default, circles are centered at (0,0) and redii are 1.
+
+HINT: A function that works out the distance between two points might prove handy.
+
+For exmaple:
+#!/usr/bin/env python3
+
+from circle_062 import overlap
+
+def main():
+    print(overlap())
+    print(overlap(10))
+    print(overlap(10,10))
+    print(overlap(10,10,10))
+    print(overlap(10,0,10))
+    print(overlap(10,0,1,8,0,1))
+    print(overlap(10,0,1,8,0,2))
+
+
+if __name__ == '__main__':
+    main()
+
+True
+False
+False
+False
+True
+False
+True
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import math
+
+def overlap(x1=0, y1=0, r1=1, x2=0, y2=0, r2=1):
+  distance = math.sqet((x2- x1) ** 2 + (y2 - y1) ** 2)
+  return distance < (r1 + r2)
