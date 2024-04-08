@@ -1,0 +1,41 @@
+Task:
+In meeting_092.py define a Meeting class to model a meeting.
+
+A meeting has three data attributes:
+  - a starting hour
+  - a starting minute
+  - a duration
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+from meeting_092 import Meeting
+
+def main():
+
+    m = Meeting(9, 5, 30)
+
+    assert(m.hour == 9)
+    assert(m.minute == 5)
+    assert(m.duration == 30)
+
+    print(m)
+
+if __name__ == '__main__':
+    main()
+
+09:05 (30 minutes)
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Meeting(object):
+
+  def __init__(self, hour, minute, duration):
+    self.hour = hour
+    self.minute = minute
+    self.duration = duration
+
+  def __str__(self):
+    return f"{self.hour:02}:{self.minute:02} ({self.duration} minutes)"

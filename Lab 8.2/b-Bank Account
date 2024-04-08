@@ -1,0 +1,66 @@
+Task:
+In bank_082.py define a BankAccount class to model a bank account.
+
+A bank account has a single data attribute:
+  - balance
+    which can be zero or any positive floating point value.
+
+The BankAccount class defines the following instance methods:
+  - __init__()
+    initialises the bank account (balance defaults to zero)
+  - deposit()
+    adds an amount to the balance
+  - withdraw()
+    subtracts an amount from the balance if sufficient funds are available
+  - __str__()
+    returns the current balance as a string
+
+Once your class is correctly implemented, running the following program should produce the given output.
+
+from bank_082 import BankAccount
+
+def main():
+    b1 = BankAccount()
+
+    assert(b1.balance == 0)
+    b1.deposit(100)
+    b1.deposit(50)
+    assert(b1.balance == 150)
+    b1.withdraw(200)
+    assert(b1.balance == 150)
+    b1.withdraw(150)
+    assert(b1.balance == 0)
+    print(b1)
+
+    b2 = BankAccount(30)
+
+    assert(b2.balance == 30)
+    b2.withdraw(0.01)
+    print(b2)
+
+if __name__ == '__main__':
+    main()
+
+
+Your current balance is 0.00 euro
+Your current balance is 29.99 euro
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class BankAccount(object):
+  
+  def __init__(self, balance=0):
+    self.balance = balance
+
+  def deposit(self, balance):
+    self.balance += balance
+
+  def withdraw(self, balance):
+    if self.balance >= balance:
+      self.balance -= balance
+
+  def __str__(self):
+    return f"Your current balance is {self.balance:.02f} euro"

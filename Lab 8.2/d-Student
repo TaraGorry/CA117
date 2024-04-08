@@ -1,0 +1,75 @@
+Task:
+In student_082.py define a Student class to model a student.
+
+A student has three data attributes:
+  - sid
+    (student ID)
+  - name
+  - modlist
+    (the list of modules for which the student is registered)
+
+The Student class defines the following instance methods:
+  - __init__()
+    initialises the student (module list defaults to empty)
+  - add_module()
+    adds a module (passed as an argument) to modlist (no effect if module already in modlist)
+  - del_module()
+    removes a module (passed as an argument) from modlist (no effect if module not in modlist)
+  - __str__()
+    returns a string representation of the student (where modules are listed in ascending alphabetical order)
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+from student_082 import Student
+
+def main():
+
+    s1 = Student(15234654, 'Jimmy Murphy')
+
+    assert(s1.name == 'Jimmy Murphy')
+    assert(s1.sid == 15234654)
+    assert(s1.modlist == [])
+    s1.add_module('CA116')
+    s1.add_module('CA117')
+    print(s1)
+
+    s2 = Student(17234654, 'Harry Byrne', ['CA177', 'CA101'])
+    print(s2)
+
+    s3 = Student(19343112, 'Mindy Malone')
+    print(s3)
+
+if __name__ == '__main__':
+    main()
+
+ID: 15234654
+Name: Jimmy Murphy
+Modules: CA116, CA117
+ID: 17234654
+Name: Harry Byrne
+Modules: CA101, CA177
+ID: 19343112
+Name: Mindy Malone
+Modules:
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Student(object):
+
+  def __init__(self, sid=0, name="", modlist=None):
+    self.sid = sid
+    self.name = name
+    self.modlist = [] if modlist is None else modlist
+
+  def add_module(self, modlist):
+    self.modlist.append(modlist)
+
+  def del_module(self, modlist):
+    self.modlist.remove(modlist)
+
+  def __str__(self):
+    modlist = ", ".join(sorted(self.modlist))
+    return f"ID: {self.sid}\nName: {self.name}\nModules: {modlist}"

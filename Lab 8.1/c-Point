@@ -1,0 +1,66 @@
+Task:
+In point_081.py define a Point class to model a point in a two dimensional space.
+
+A point has two data attributes:
+  - x
+  - y
+
+The Point class defines the following instance methods:
+  - set_attributes()
+    sets the instance's attributes to the specified values
+  - print_attributes()
+    prints the instance's attributes
+  - reflect()
+    reflects a point's coordinates through the origin (the effect is to negate the point's x and y coordinates)
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+from point_081 import Point
+
+def main():
+    p1 = Point()
+    p2 = Point()
+
+    p1.set_attributes(5, 5)
+    p2.set_attributes(4.2, 3.8)
+
+    p1.print_attributes()
+    p2.print_attributes()
+
+    assert(p1.x == 5)
+    assert(p1.y == 5)
+
+    p1.reflect()
+    p1.print_attributes()
+
+    assert(p1.x == -5)
+    assert(p1.y == -5)
+
+if __name__ == '__main__':
+    main()
+
+
+x: 5.00
+y: 5.00
+x: 4.20
+y: 3.80
+x: -5.00
+y: -5.00
+
+
+Solutuon:
+
+#!/usr/bin/env python3
+
+class Point(object):
+  
+  def set_attributes(self, x, y):
+    self.x = x
+    self.y = y
+
+  def reflect(self):
+    self.x *= -1
+    self.y *= -1
+
+  def print_attributes(self):
+    print(f"x: {self.x:.02f}\ny: {self.y:.02f}")

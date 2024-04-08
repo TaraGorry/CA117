@@ -1,0 +1,72 @@
+Task:
+In schedule_092.py define a Schedule class to model the day's schedule of meetings.
+
+Include in schedule_092.py a copy of your Meeting class from the previous question.
+
+The Schedule class defines the following instance methods:
+  - __init__()
+    initialises a new Schedule
+  - add()
+    adds a new Meeting to the schedule
+  - __str__()
+    returns a string containing all meeting details in increasing order of start time
+
+Once your classes are correctly implemented, running the following program should produce the given output.
+
+from schedule_092 import Meeting, Schedule
+
+def main():
+    schedule = Schedule()
+
+    m = Meeting(13, 0, 15)
+    schedule.add(m)
+
+    m = Meeting(9, 5, 30)
+    schedule.add(m)
+
+    m = Meeting(16, 30, 5)
+    schedule.add(m)
+
+    print(schedule)
+
+if __name__ == '__main__':
+    main()
+
+Schedule
+--------
+09:05 (30 minutes)
+13:00 (15 minutes)
+16:30 (5 minutes)
+Meetings today: 3
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Meeting(object):
+
+  def __init__(self, hour, minute, duration):
+    self.hour = hour
+    self.minute = minute
+    self.duration = duration
+
+  def __str__(self):
+    return f"{self.hour:02}:{self.minute:02} ({self.duration} minutes)"
+
+
+class Schedule(object):
+
+  def __init__(self):
+    self.d = {}
+
+  def add(self, meeting):
+    self.d[meeting.hour] = meeting
+
+  def __str__(self):
+    schedules_list = []
+    for hour in sorted(self.d.keys()):
+      schedules_list.append(str(self.d[hour]))
+      schedulee_list = len(schedules_list)
+      schedule_list = "\n".join(schedules_list)
+    return f"Schedule\n--------\n{schedule_list}\nMeetings today: {schedulee_list}"

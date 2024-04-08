@@ -1,0 +1,64 @@
+Task:
+It is possible to add circles.
+
+Adding two circles, A and B, produces a new circle whose centre is the midpoint between the centres of A and B and whose radius is the sum of the redii of A and B.
+
+Add the required instance method to the Circle class to support this behavious and call it circle_add_091.py. (Include your Point class definition again.)
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+from circle_add_091 import Point, Circle
+
+def main():
+    p1 = Point()
+    p2 = Point(4, 6)
+
+    c1 = Circle(p1, 10)
+    c2 = Circle(p2, 5)
+
+    c3 = c1 + c2
+    assert(isinstance(c3, Circle))
+    print(c3)
+
+if __name__ == '__main__':
+    main()
+
+Centre: (2.0, 3.0)
+Radius: 15
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Point(object):
+
+  def __init__(self, x=0, y=0):
+    self.x = x
+    self.y = y
+
+  def midpoint(self, other):
+    x_m = (self.x + other.x) / 2
+    y_m = (self.y + other.y) / 2
+    return Point(x_m, y_m)
+
+  def __str__(self):
+    return f"({self.x:.01f}, {self.y:.01f})"
+
+
+class Circle(object):
+  
+  def __init__(self, centre=None, radius=1):
+    if centre is None:
+      self.centre = Point()
+    else:
+      self.centre = centre
+    self.radius = radius
+
+  def __add__(self, other):
+    radius = (self.radius + other.radius)
+    centre = (self.centre.midpoint(other.centre))
+    return Circle(centre, radius)
+
+  def __str__(self):
+    return f"Centre: {self.centre}\nRadius: {self.radius}"

@@ -1,0 +1,96 @@
+Task:
+In contactlist_092.py define a Contactlist class to model a contact list.
+
+Include in contactlist_091.py a copy of your Contact class from the previous question.
+
+A contact list has a single data attribute:
+  - d
+
+d is a dictionary that maps a name to the corresponding instance of the Contact class.
+
+The Contactlist class defines the following instance methods:
+  - __init__()
+    Initialises a new Contactlist
+  - add()
+    Adds a new Contact to the contact list (or updates and existing Contact if already present)
+  - remove()
+    removes a Contact from the contact list (no effect if no such contact exixts)
+  - get()
+    returns the Contact with the specified name (or returns None if not in the contact list)
+  - __str__()
+    returns a string containing all contacts' details listed in increasing alphabetical name order (you might add each contact's details to a list and invoke join on that list in order to build the output of this method)
+
+Once your classes are correctly implemented, running the following program should produce the given output.
+
+from contactlist_092 import Contact, Contactlist
+
+def main():
+    clist = Contactlist()
+
+    c1 = Contact('Sue', '085-6442378', 'sue@eircom.net')
+    clist.add(c1)
+
+    c2 = Contact('Jimmy', '086-1223277', 'james@apple.com')
+    clist.add(c2)
+
+    c3 = Contact('Wendy', '086-9112645', 'wendy@physics.dcu.ie')
+    clist.add(c3)
+
+    c = clist.get('Wendy')
+    assert(c is c3)
+
+    clist.remove('Wendy')
+    c = clist.get('Wendy')
+    assert(c is None)
+
+    c4 = Contact('Abbey', '087-7586344', 'abbey@gmail.com')
+    clist.add(c4)
+
+    print(clist)
+
+if __name__ == '__main__':
+    main()
+
+Contact list
+------------
+Abbey 087-7586344 abbey@gmail.com
+Jimmy 086-1223277 james@apple.com
+Sue 085-6442378 sue@eircom.net
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Contact(object):
+
+  def __init__(self, name, phone, email):
+    self.name = name
+    self.phone = phone
+    self.email = email
+
+  def __str__(self):
+    return f"{self.name} {self.phone} {self.email}
+
+
+class Contactlist(object):
+  
+  def __init__(self):
+    self.d = {}
+
+  def add(self, contact):
+    self.d[contact.name] = contact
+
+  def remove(self, name):
+    if name in self.d:
+      del self.d[name]
+    
+  def get(self, name):
+    return self.d.get(name)
+
+  def __str__(self):
+    contact_list = []
+    for name in sorted(self.d.keys()):
+      contacts_list.append(str(self.d[name]))
+      contact_list = "\n".join(contacts_list)
+    return f"Contact list\n------------\n{contact_list}"

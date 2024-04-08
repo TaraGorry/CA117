@@ -1,0 +1,65 @@
+Task:
+In bank_081.py define a BankAccount class to model a bank account.
+
+A bank account has three attributes:
+  - name
+  - number
+  - balance
+
+The BankAccount class defines the following instance methods:
+  - set_attributes()
+    sets the instance's attributes to the specified values
+  - print_attributes()
+    prints the instance's attributes
+  - deposit()
+    increases the balance by a given amount
+
+Once your class is correctly implemented, running the 
+following program should produce the given output.
+
+from bank_081 import BankAccount
+
+def main():
+
+    b1 = BankAccount()
+    b1.set_attributes('Jim', 12343111, 300)
+
+    assert(b1.name == 'Jim')
+    assert(b1.number == 12343111)
+    assert(b1.balance == 300)
+
+    b1.print_attributes()
+    b1.deposit(100)
+    b1.print_attributes()
+
+    assert(b1.balance == 400)
+
+
+if __name__ == '__main__':
+    main()
+
+
+Name: Jim
+Account number: 12343111
+Balance: 300.00
+Name: Jim
+Account number: 12343111
+Balance: 400.00
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class BankAccount(object):
+   
+   def set_attributes(self, name, number, balance):
+      self.name = name
+      self.number = number
+      self.balance = balance
+
+    def deposit(self, balance):
+      self.balance += balance
+
+    def print_attributes(self):
+      print(f"Name: {self.name}\nAccount number: {self.number}\nBalance: {self.balance:.02f}")

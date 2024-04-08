@@ -1,0 +1,71 @@
+Task:
+In lamp_082.py define a Lamp class to model a lamp.
+
+A lamp has a single boolean data attribute:
+  - On
+    On can be either True or False.
+
+The Lamp class defines the following instance methods:
+  - __init__()
+    initialises the lamp(defaults to off)
+  - turn_on()
+    turns the lamp on (has no effect if already on)
+  - turn_off()
+    turns the lamp orr (has no effect if already off)
+  - toggle()
+    turns the lamp on if currently off and off if currently on
+
+When your class is correctly implemented, running the following program should produce no output.
+
+from lamp_082 import Lamp
+
+def main():
+    lamp1 = Lamp()
+
+    assert(not(lamp1.on))
+    lamp1.turn_off()
+    assert(not(lamp1.on))
+    lamp1.turn_on()
+    assert(lamp1.on)
+    lamp1.turn_on()
+    assert(lamp1.on)
+    lamp1.turn_off()
+    assert(not(lamp1.on))
+    lamp1.toggle()
+    assert(lamp1.on)
+    lamp1.turn_off()
+    lamp1.turn_off()
+    assert(not(lamp1.on))
+
+    lamp2 = Lamp(True)
+
+    assert(lamp2.on)
+    lamp2.toggle()
+    assert(not(lamp2.on))
+
+if __name__ == '__main__':
+    main()
+
+
+Solution:
+
+#!/usr/nin/env python3
+
+class Lamp(object):
+  
+  def __init__(self, on=False):
+    self.on = on
+
+  def turn_on(self):
+    if not self.on:
+      self.on = True
+
+  def turn_off(self):
+    if self.on:
+      self.on = False
+
+  def toggle(self):
+    if self.on:
+      self.on = False
+    else:
+      self.on = True

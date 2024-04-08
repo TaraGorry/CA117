@@ -1,0 +1,73 @@
+Task:
+In gaa_add_091.py define a Score class to model a GAA Score.
+
+Start with a copy of the code you used in gaa_comp_091.py.
+
+Extend the class so it supports the addition of GAA scores.
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+from gaa_add_091 import Score
+
+def main():
+
+    s1 = Score()
+    s2 = Score(3, 12)
+    s3 = Score(4, 9)
+    s4 = Score(1, 1)
+
+    s5 = s3 + s4
+    print(s5)
+    assert(isinstance(s5, Score))
+    assert(s5 is not s3)
+    assert(s5 is not s4)
+
+    before = s2
+    s2 += s4
+    print(s2)
+    assert(isinstance(s2, Score))
+    assert(s2 is before)
+    assert(s2 is not s4)
+
+if __name__ == '__main__':
+    main()
+
+5 goal(s) and 10 point(s)
+4 goal(s) and 13 point(s)
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Score(object):
+  
+  def __init__(self, goals=0, points=0):
+    self.goals = goals
+    self.points = points
+
+  def TotalScore(self):
+    return self.goals * 3 + self.points
+
+  def __eq__(self, other):
+    return self.TotalScore() == other.TotalScore()
+
+  def __gt__(self, other):
+    return self.TotalScore() > other.TotalScore()
+
+  def __le__(self, other):
+    return self.TotalScore() <= other.TotalScore()
+
+  def __add__(self, other):
+    total_goals = self.goals + other.goals
+    total_points = self.points + other.points
+    return Score(total_goals, total_points)
+
+  def __iadd__(self, other):
+    z = self + other
+    self.goals = z.goals
+    self.points = z.points
+    return self
+
+  def __str__(self):
+    return "{} goal(s) and {} point(s)".format(self.goals, self.points)

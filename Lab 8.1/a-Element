@@ -1,0 +1,88 @@
+Task:
+In element_081.py define an Element class to model a chemical element.
+
+An element has four attributes:
+  - number
+  - name
+  - symbol
+  - boiling point
+
+The Element class defines the following instance methods:
+  - set_attributes()
+    sets the instance's attributes to the specified values.
+  - print_attributes()
+    prints the instance's attributes.
+
+When ypur class is correctly implemented, running the following program should produce the given output.
+
+from element_081 import Element
+
+def main():
+
+    e1 = Element()
+    e2 = Element()
+    e3 = Element()
+    e4 = Element()
+    e5 = Element()
+
+    e1.set_attributes(1, 'Hydrogen', 'H', 20.3)
+    e1.print_attributes()
+
+    assert(e1.number == 1)
+    assert(e1.name == 'Hydrogen')
+    assert(e1.symbol == 'H')
+    assert(e1.bp == 20.3)
+
+    e2.set_attributes(3, 'Lithium', 'Li', 1615)
+    e2.print_attributes()
+
+    e3.set_attributes(11, 'Sodium', 'Na', 1156)
+    e3.print_attributes()
+
+    e4.set_attributes(12, 'Magnesium', 'Mg', 1380)
+    e4.print_attributes()
+
+    e5.set_attributes(79, 'Gold', 'Au', 3129)
+    e5.print_attributes()
+
+
+if __name__ == '__main__':
+    main()
+
+
+Number: 1
+Name: Hydrogen
+Symbol: H
+Boiling point: 20.3 K
+Number: 3
+Name: Lithium
+Symbol: Li
+Boiling point: 1615 K
+Number: 11
+Name: Sodium
+Symbol: Na
+Boiling point: 1156 K
+Number: 12
+Name: Magnesium
+Symbol: Mg
+Boiling point: 1380 K
+Number: 79
+Name: Gold
+Symbol: Au
+Boiling point: 3129 K
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Element(object):
+
+  def set_attributes(self, number=0, name="", symbol="", bp=0)
+    self.number = number
+    self.name = name
+    self.symbol = symbol
+    self.bp = bp
+
+  def print_attributes(self):
+    print(f"Number: {self.number}\nName: {self.name}\nSymbol: {self.symbol}\nBoiling point: {self.bp} K")

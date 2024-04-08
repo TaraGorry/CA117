@@ -1,0 +1,59 @@
+Task:
+In register_082.py define a class to model a cash register.
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+#!/usr/bin/env python3
+
+import sys
+
+from register_082 import CashRegister
+
+def main():
+
+    cr = CashRegister()
+    print(cr)
+
+    cr.add_item(3.28)
+    assert(cr.total == 3.28)
+    assert(cr.count == 1)
+
+    cr.add_item(12.92)
+    print(cr)
+
+    cr.clear()
+
+    cr.add_item(9.1)
+    print(cr)
+
+if __name__ == '__main__':
+    main()
+
+Items: 0
+Total: 0.00
+Items: 2
+Total: 16.20
+Items: 1
+Total: 9.10
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class CachRegister(object):
+
+  def __init__(self, total=0, count=0):
+    self.total = total
+    self.count = count
+
+  def add_items(self, item):
+    self.total += item
+    self.count += 1
+
+  def clear(self):
+    self.total = 0
+    self.count = 0
+
+  def __str__(self):
+    return f"Items: {self.count}\nTotal: {self.total:.02f}"

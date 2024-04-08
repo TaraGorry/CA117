@@ -1,0 +1,41 @@
+Task:
+In contact_092.py define a Contact class to model a contact.
+
+A contact has three data attributes:
+  - name
+  - phone
+  - email
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+from contact_092 import Contact
+
+def main():
+
+    c = Contact('Sue', '085-6442378', 'sue@eircom.net')
+
+    assert(c.name == 'Sue')
+    assert(c.phone == '085-6442378')
+    assert(c.email == 'sue@eircom.net')
+
+    print(c)
+
+if __name__ == '__main__':
+    main()
+
+Sue 085-6442378 sue@eircom.net
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Contact(object):
+
+  def __init__(self, name, phone, email):
+    self.name = name
+    self.phone = phone
+    self.email = email
+
+  def __str__(self):
+    return f"{self.name} {self.phone} {self.email}

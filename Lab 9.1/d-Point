@@ -1,0 +1,56 @@
+Task:
+In point_091.py define a Point class to model a point in a two dimensional space.
+
+A point has two data attributes:
+  - x
+  - y
+
+The Point class defines the following instance methods:
+  - __init__()
+    initialises the point (coordinates default to zero)
+  - midpoint()
+    returns a new instance of Point that is the midpoint between this point and another point
+  - __str__()
+    returns the point as a string
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+from point_091 import Point
+
+def main():
+    p1 = Point(2, 3)
+    p2 = Point(4, 6)
+
+    p3 = p1.midpoint(p2)
+
+    print(p1)
+    print(p2)
+    print(p3)
+
+    assert(isinstance(p3, Point))
+
+if __name__ == '__main__':
+    main()
+
+(2.0, 3.0)
+(4.0, 6.0)
+(3.0, 4.5)
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Point(object):
+
+  def __init__(self, x=0, y=0):
+    self.x = x
+    self.y = y
+
+  def midpoint(self, other):
+    x_m = (self.x + other.x) / 2
+    y_m = (self.y + other.y) / 2
+    return Point(x_m, y_m)
+
+  def __str__(self):
+    return f"({self.x:.01f}, {self.y:.01f})"

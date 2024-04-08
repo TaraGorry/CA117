@@ -1,0 +1,77 @@
+Task:
+In circle_091.py define a Circle class to model a circle in a two dimensional space.
+
+A circle has two data attributes:
+  - radius
+    (a floating point number)
+  - centre
+    (an instance of Point above)
+
+Include in circle_091.py a copy of the Point class definition you developed in the previous question.
+
+For any new Circle instance the radius defaults to one and its centre defaults to the Point (0,0).
+
+Define appropriate __init__() and __str__() methods.
+
+When your class is correctly inplemented, running the following program should produce the given output.
+
+from circle_091 import Point, Circle
+
+def main():
+    p1 = Point(2, 3)
+    c1 = Circle(p1, 5)
+    assert(c1.centre is p1)
+    assert(c1.radius == 5)
+
+    c2 = Circle()
+    assert(isinstance(c2.centre, Point))
+    assert(c2.radius == 1)
+
+    c3 = Circle()
+    assert(c3.centre is not c2.centre)
+
+    print(c1)
+    print(c2)
+    print(c3)
+
+if __name__ == '__main__':
+    main()
+
+Centre: (2.0, 3.0)
+Radius: 5
+Centre: (0.0, 0.0)
+Radius: 1
+Centre: (0.0, 0.0)
+Radius: 1
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Point(object):
+
+  def __init__(self, x=0, y=0):
+    self.x = x
+    self.y = y
+
+  def midpoint(self, other):
+    x_m = (self.x + other.x) / 2
+    y_m = (self.y + other.y) / 2
+    return Point(x_m, y_m)
+
+  def __str__(self):
+    return f"({self.x:.01f}, {self.y:.01f})"
+
+
+class Circle(object):
+  
+  def __init__(self, centre=None, radius=1):
+    if centre is None:
+      self.centre = Point()
+    else:
+      self.centre = centre
+    self.radius = radius
+
+  def __str__(self):
+    return f"Centre: {self.centre}\nRadius: {self.radius}"
