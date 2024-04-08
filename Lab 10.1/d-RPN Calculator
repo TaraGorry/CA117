@@ -1,0 +1,169 @@
+Task:
+Reverse Polish Notation (RPN) is a mathematical notation in 
+which every operator follows all of its operands.
+
+Examples:
+    2 + 3 is expressed as 2 3 +
+    2 + sqrt(3) is expressed as 2 3 r +
+    1 + 2 * 3 is expressed as 1 2 3 * +
+    5 * -2 is expressed as 5 2 n *
+    sqrt(-(2 * (1 - (2 + 3)))) is expressed as 2 1 2 3 + - * 
+    n r 
+
+In rpn_101.py define a function called calculator() that 
+takes a single parameter line (an RPN expression read from 
+stdin).
+
+The calculator() function computes the valur of the RPN 
+expression.
+
+Should the RPN expression be invalid then the calculator() 
+function raises an IndexError exception.
+
+HINTS:
+    1: Convert all user-supplied numbers to floats.
+    2: In solving this problem, again it might help to make 
+       make use of a stack.
+    3: You might find two dictionaries useful: binops maps 
+       from each + - * / to a cooresponding function while
+       uniops maps from each of n r to a corresponding function.
+    4: When you encounter a number in an RPN expression push
+       it onto the stack. If you encounter an operator pop 
+       its arguments from the stack (one or two), apply the 
+       operator to the popped argument(s) and push the result
+       onto the stack
+    5: If after processing an RPN expression you are left with
+       a single number on the stack, it is the answer. Your 
+       calculator() function should return it. Otherwise
+       calculator() should raise an IndexError exception.
+
+For Example:
+
+from rpn_101 import calculator
+import sys
+
+tests = ['5',
+'8.5 2 /',
+'2 3 +',
+'2 3 r +',
+'1 2 3 * +',
+'5 2 n *',
+'1 2 3 + -',
+'2 1 2 3 + - *',
+'2 1 2 3 + - * n',
+'2 1 2 3 + - * n r',
+'6 +',
+'9 r']
+
+def main():
+
+    for test in tests:
+        try:
+            a = calculator(test.strip())
+            print('{:.2f}'.format(a))
+        except IndexError:
+            print('Invalid RPN expression')
+
+if __name__ == '__main__':
+    main()
+
+5.00
+4.25
+5.00
+3.73
+7.00
+-10.00
+-4.00
+-8.00
+8.00
+2.83
+Invalid RPN expression
+3.00
+
+
+Here is some code to inspire you:
+
+from math import sqrt
+
+binops = {'+': float.__add__,
+          '-': float.__sub__,
+          '*': float.__mul__,
+          '/': float.__truediv__}
+
+uniops = {'n': float.__neg__,
+          'r': sqrt}
+
+# To add 3 and 5 we can do something like this...
+print(binops['+'](3.0, 5.0))
+
+# To calcualte the square root of 9 we can do something like this...
+print(uniops['r'](9.0))
+
+8.0
+3.0
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Stack(object):
+  
+  def __init__(self):
+    self.l = []
+
+  def push(self, e):
+    self.l.append(e)
+
+  def pop(self):
+    return self.l.pop()
+
+  def top(self):
+    return self.l[-1]
+
+  def is_empty(self):
+    return len(self.l) == 0
+
+  def __len__(self):
+    return len(self.l)
+
+
+def calculator(line):
+   s = Stack()
+   line = line.split()
+
+   rn = ["r", "n"]
+   sym = ["+", "-", "*", "/"]
+
+   for each in line:
+      if (each not in rn) and (each not in sym):
+         s.push(each)
+      
+      elif each in rn:
+         num = float(s.pop())
+         s.push(calc1(each, num))
+
+      elif each in sym:
+         num1 = float(s.pop())
+         num2 = float(s.pop())
+         s.push(calc2(each, num1, num2))
+    
+    return float(s.top())
+
+
+def calc1(sym, num):
+   if sym == "r":
+      return (num ** (1 / 2))
+   elif sym == "n":
+      return -num
+   
+
+def calc2(sym, num1, num2):
+   if sym == "+":
+      return num1 + num2
+   elif sym == "/":
+      return num2 / num1
+   elif sym == "*":
+      return num1 * num2
+   elif sym == "-":
+      return num2 - num1

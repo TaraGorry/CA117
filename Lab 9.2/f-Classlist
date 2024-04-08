@@ -1,0 +1,71 @@
+Task:
+In classlist_092.py define a Classlist class to model a collection of students.
+
+A classlist is essentially a mapping from student ID numbers to Student objects.
+
+Printing a classlist prints all students in descending order of their average mark.
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+#!/usr/bin/env python3
+
+from classlist_092 import Student, Classlist
+
+def main():
+
+    cl = Classlist()
+
+    s1 = Student('Hortense', 22217654, [('CA116', 70), ('CA117', 60)])
+    s2 = Student('Bella', 22218393, [('CA177', 70), ('CA117', 81)])
+
+    cl.add(s1)
+    cl.add(s2)
+
+    print(cl)
+
+
+if __name__ == '__main__':
+    main()
+
+Name: Bella
+ID: 22218393
+Modules: CA117, CA177
+Average mark: 76
+Name: Hortense
+ID: 22217654
+Modules: CA116, CA117
+Average mark: 65
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Student(object):
+
+  def __init__(self, name, sid, modmark):
+    self.name = name
+    self.sid = sid
+    self.modmark = sorted(modmark, key=lamvda x: x[0])
+
+  def average(self):
+    total_marks = sum(mark for _, mark in self.modmark)
+    return round(total_mark / len(self.modmark))
+
+  def __str__(self):
+    modname = ", ".join(mod[0] for mod in self.modmark)
+    average = self.average()
+    return f"Name: {self.name}\nID: {self.sid}\nModules: {modname}\nAverage mark: {average}"
+
+
+class Classlist(object):
+  
+  def __init__(self):
+    self.students = []
+
+  def add(self, student):
+    self.students.append(student)
+
+  def __str__(self):
+    sortstudents = sorted(self.students, key=lambda x: x.average(), reverse=True)
+    return "\n".join(str(student) for student in sortstudents)

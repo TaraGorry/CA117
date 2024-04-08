@@ -1,0 +1,55 @@
+Task:
+In student_092.py define a Student class to model a student.
+
+A student has a name, a unique ID number and a mark for each module for which they are registered.
+
+A student's average mark is the average of their marks across all modules reouned to the nearest integer.
+
+When printed, the modules for which a student is registered are listed in increasing alphabetical order.
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+#!/usr/bin/env python3
+
+from student_092 import Student
+
+def main():
+
+    s1 = Student('Hortense', 22217654, [('CA116', 70), ('CA117', 60)])
+    s2 = Student('Bella', 22218393, [('CA177', 70), ('CA117', 81)])
+
+    print(s1)
+    print(s2)
+
+if __name__ == '__main__':
+    main()
+
+Name: Hortense
+ID: 22217654
+Modules: CA116, CA117
+Average mark: 65
+Name: Bella
+ID: 22218393
+Modules: CA117, CA177
+Average mark: 76
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Student(object):
+
+  def __init__(self, name, sid, modmark):
+    self.name = name
+    self.sid = sid
+    self.modmark = sorted(modmark, key=lamvda x: x[0])
+
+  def average(self):
+    total_marks = sum(mark for _, mark in self.modmark)
+    return round(total_mark / len(self.modmark))
+
+  def __str__(self):
+    modname = ", ".join(mod[0] for mod in self.modmark)
+    average = self.average()
+    return f"Name: {self.name}\nID: {self.sid}\nModules: {modname}\nAverage mark: {average}"

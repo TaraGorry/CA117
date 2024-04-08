@@ -1,0 +1,84 @@
+Task:
+In brackets_101.py define a function called matcher() that takes a single string parameter.
+
+The matcher() function checks that all left and right brackets in the supplied string match.
+
+matcher() should return True if brackets match and False otherwise.
+
+Brackets that need to be matched are () {} [].
+
+HINTS:
+  1: Make good use of a stack in solving this problem and include a copy of your stack definition from stack_101.py in brackets_101.py.
+  2: If lefties are ({[ then righties are ]}).
+  3: Push lefties and pop on meating a righty.
+
+For example:
+
+from brackets_101 import matcher
+import sys
+
+tests = ['()',
+'(())',
+'(({}))',
+'(())(){}{(([]))}',
+'(()',
+'(()){()]',
+')(()){([()])}']
+
+def main():
+
+    for test in tests:
+        print(matcher(test.strip()))
+
+if __name__ == '__main__':
+    main()
+
+True
+True
+True
+True
+False
+False
+False
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+class Stack(object):
+  
+  def __init__(self):
+    self.l = []
+
+  def push(self, e):
+    self.l.append(e)
+
+  def pop(self):
+    return self.l.pop()
+
+  def top(self):
+    return self.l[-1]
+
+  def is_empty(self):
+    return len(self.l) == 0
+
+  def __len__(self):
+    return len(self.l)
+
+
+def matcher(s):
+  stack = Stack()
+  lefties = "({["
+  righties = "]})"
+
+  for char in s:
+    if char in lefties:
+      stack.push(char)
+    elif char in righties:
+      if stack.is_empty():
+        return False
+      if righties.index(char) != lefties.index(stack.pop()):
+        return False
+  
+  return stack.is_empty()
