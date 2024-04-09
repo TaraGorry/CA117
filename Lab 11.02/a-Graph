@@ -1,0 +1,89 @@
+Task:
+In graph_112.py define the Graph class as described durning lectures.
+
+When your class is correctly implemented, running the following program should produce the given output.
+
+cat graph_input_00_112.txt
+7
+0 1
+0 2
+0 5
+0 6
+3 4
+3 5
+4 5
+4 6
+
+#!/usr/bin/env python3
+
+import sys
+
+from graph_112 import Graph
+
+def main():
+
+    with open('graph_input_00_112.txt', 'r') as f:
+
+        V = int(f.readline().strip())
+
+        g = Graph(V)
+
+        for line in f:
+            v, w = [int(t) for t in line.strip().split()]
+            g.addEdge(v, w)
+
+    for v in range(g.V):
+        print('Vertex {} connects to {}'.format(v, g.adj[v]))
+    for v in range(V):
+        print('Degree of vertex {} is {}'.format(v, g.degree(v)))
+    print('Maximum degree is {}'.format(g.maxDegree()))
+    print('Average degree is {:.2f}'.format(g.avgDegree()))
+
+if __name__ == '__main__':
+    main()
+
+Vertex 0 connects to [1, 2, 5, 6]
+Vertex 1 connects to [0]
+Vertex 2 connects to [0]
+Vertex 3 connects to [4, 5]
+Vertex 4 connects to [3, 5, 6]
+Vertex 5 connects to [0, 3, 4]
+Vertex 6 connects to [0, 4]
+Degree of vertex 0 is 4
+Degree of vertex 1 is 1
+Degree of vertex 2 is 1
+Degree of vertex 3 is 2
+Degree of vertex 4 is 3
+Degree of vertex 5 is 3
+Degree of vertex 6 is 2
+Maximum degree is 4
+Average degree is 2.29
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+class Graph(object):
+
+  def __init__(self, V):
+    self.V = V
+    self.adj = {}
+
+    for v in range(V):
+      self.adj[v] = []
+
+  def addEdge(self, v, w):
+    self.adj[v].append(w)
+    selfadj[w].append(v)
+
+  def degree(self, v):
+    return len(self.adj[v])
+
+  def maxDegree(self):
+    return max([self.degree(v) for v in range(self.V)])
+
+  def avgDegree(self):
+    return sum([self.degree(v) for v in range(self.V)]) / self.V

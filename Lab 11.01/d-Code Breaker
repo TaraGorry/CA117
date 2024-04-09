@@ -1,0 +1,56 @@
+Task:
+Jimmy has invented a ground-breaking encryption algorithm.
+
+After each vower he adds a p followed by the vowel again.
+
+Write a program called decode_111.py that decodes Jimmy's 
+messages.
+
+Messages (all lower-case) are read, one per line, from stdin.
+
+Example Input:
+cat decode_stdin_00_111.txt
+papapapa
+papapripikapa
+prepetty popolly
+pepeteper pipipeper pipickeped apa pepeck opof pipickleped pepeppepers
+jipimmy lopovepes sapally opo'bripiepen
+
+Example Output:
+python3 decode_111.py < decode_stdin_00_111.txt
+papa
+paprika
+pretty polly
+peter piper picked a peck of pickled peppers
+jimmy loves sally o'brien
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+def decode(line):
+
+  vowels = "aeiou"
+  string = ""
+
+  i = 0
+  while i < len(line):
+    string = string + line[i]
+    if line[i] in vowels:
+      i += 1
+    i += 1
+  return string
+
+
+def main():
+  
+  lines = [line.strip() for line in sys.stdin]
+  
+  for line in lines:
+    print(decode(line))
+
+if __name__ == "__main__":
+  main()

@@ -1,0 +1,36 @@
+Task:
+In a module named power_102.py implement a power() fucntion that when passed two integers m and n, returns m to the power of n.
+
+Your function must be recursive.
+
+When implemented correctly, running the following program should produce the given output.
+
+from power_102 import power
+
+def main():
+    print(power(2,3))
+    print(power(4,4))
+    print(power(2,32))
+    print(power(10,3))
+    print(power(8,0))
+
+if __name__ == '__main__':
+    main()
+
+8
+256
+4294967296
+1000
+1
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+def power(m, n):
+
+  if m == 0 or n == 0:
+    return 1
+
+  return m ** n

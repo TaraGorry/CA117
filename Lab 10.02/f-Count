@@ -1,0 +1,37 @@
+Task:
+In a module named count_102.py implement a count() function 
+that when passed a string returns the number of characters in
+the string.
+
+Your function must be recursive and connot use the built-in 
+len() function.
+
+When implemented correctly, running the following program 
+should produce the given output.
+
+from count_102 import count
+
+def main():
+    len = None
+    print(count('cat'))
+    print(count('catastrophe'))
+    print(count(''))
+
+if __name__ == '__main__':
+    main()
+
+3
+11
+0
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+def count(s):
+
+    if s == "":
+        return 0
+    
+    return 1 + count(s[1:])

@@ -1,0 +1,47 @@
+Task:
+Wendy has decided to go onn a well-deserved cycling holiday.
+
+She will sysle to her destination on day K and cycle home on 
+day K + 2.
+
+Wendy is flexible in terms of departure date but she wants to
+ minimise the maximum tempeture she will encounter on each of
+  her cycling days.
+
+Write a program called holiday_111.py that reads in a single 
+line of N integers. The integers represent the tempeture 
+forecast for the next N days.
+
+Your program should output the best day for Wendy to depart 
+along with the maximum tempeture Wendy will encounter while 
+cycling. If there is more than one option output the soonest 
+one.
+
+Example Input 1:
+cat holiday_stdin_00_111.txt
+18 27 34 28 30
+
+Example Output 1:
+python3 holiday_111.py < holiday_stdin_00_111.txt
+2 28
+
+Example Input 2:
+cat holiday_stdin_01_111.txt
+12 13 20 20 11
+
+Example Output 2:
+python3 holiday_111.py < holiday_stdin_01_111.txt
+1 20
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+temps = [int(n) for n in sys.stdin.read().split()]
+
+pairs = [max(temps[i], temps[i + 2]) for i in range(len(temps) - 2)]
+
+print(pairs.index(min(pairs)) + 1, min(pairs))

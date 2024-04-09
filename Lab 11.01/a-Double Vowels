@@ -1,0 +1,46 @@
+Task:
+Write a program called doubles_111.py that reads a list of words from stdin (one word per line and all lower-case).
+
+Your program should print the word that contains most double cowels (two successice instances of the same vowel constitute a double vowel).
+
+Note that each vowel can be used only one in a double vowel i.e. the string eee contains a single double vowel.
+
+You can assume there will always be a unique winner.
+
+Example Input:
+cat doubles_stdin_00_111.txt
+artist
+engineer
+beekeeper
+programmer
+
+Example Output:
+python3 doubles_111.py < doubles_stdin_00_111.txt
+beekeeper
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+double = {}
+vowels = ["aa", "ee", "ii", "oo", "uu"]
+
+for line in sys.stdin:
+  line = line.strip()
+
+  for v in vowels:
+    if v in line.lower():
+      double[line] = line.count(v)
+
+word = ""
+max = 0
+
+for k, v in double.items():
+  if v > max:
+    max = v
+    word = k
+
+print(k)

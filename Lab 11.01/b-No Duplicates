@@ -1,0 +1,60 @@
+Task:
+Write a program called nodups_111.py that reads text from stdin.
+
+Your program should output the same text with every subsequent occurrence of a word (after its first) replaced be a full-stop.
+
+Ignore case when comparing words.
+
+Example Input:
+cat nodups_stdin_00_111.txt
+Once upon a time there was a Wicked Witch.
+In fact there were so many wicked witches
+it was hard to tell which witch was which!
+As a result, a walk through the dark forest
+was, for Rapunzel and Snow White, fraught
+with danger.
+
+Example Output:
+python3 nodups_111.py < nodups_stdin_00_111.txt
+Once upon a time there was . Wicked Witch.
+In fact . were so many . witches
+it . hard to tell which . . .
+As . result, . walk through the dark forest
+. for Rapunzel and Snow White, fraught
+with danger.
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+def replace(line, seen):
+  
+  output = []
+
+  for word in line.split():
+    tmp = "".join(c for c in word.lower() if c.isalnum())
+
+    if tmp not in seen:
+      seen.append(tmp)
+      output.append(word)
+
+    else:
+      seen.append(".")
+      output.append(".")
+    
+  return " ".join(output), seen
+
+
+def main():
+  
+  seen = []
+  lines = [line.strip() for line in sys.stdin]
+
+  for line in lines:
+    print(replace(line, seen)[0])
+
+if __name__ == "__main__":
+  main()

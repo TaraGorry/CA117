@@ -1,0 +1,30 @@
+Task:
+In a module named sumup_102.py implement a sumup() function that when passed an integer n, returns the sum of all number 0 through N.
+
+Your function must be recursive.
+
+When implemented correctly, running the following program should produce the given output.
+
+from sumup_102 import sumup
+
+def main():
+    print(sumup(0))
+    print(sumup(1))
+    print(sumup(12))
+
+if __name__ == '__main__':
+    main()
+
+0
+1
+78
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+def sumup(n):
+  if n == 0:
+    return 0
+  return n + sumup(n-1)

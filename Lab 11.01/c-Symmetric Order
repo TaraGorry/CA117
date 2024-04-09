@@ -1,0 +1,74 @@
+Task:
+Write a program called symmetric_111.py that reads a list of names (ordered by increasing length) from stdin.
+
+Names on consecutive lines (i.e. lines k and k + 1, where k is even) have the same length and are pairs.
+
+Your program should output the same list of names reordered to be symmetric around the longest name(s) in the list i.e. with elements of each pair moved to opposite ends of the list (with the first name in each pair above the second).
+
+You can assume there will always be at least one name in the input list.
+
+
+Confused?
+
+Example Input:
+cat symmetric_stdin_00_111.txt
+Abe
+Max
+Mary
+Jane
+Polly
+Timmy
+
+Example Output:
+python3 symmetric_111.py < symmetric_stdin_00_111.txt
+Abe
+Mary
+Polly
+Timmy
+Jane
+Max
+
+
+The last name in the list may not be part of a pair.
+
+Example Input:
+cat symmetric_stdin_01_111.txt
+Ben
+Una
+Sylvia
+Thomas
+Penelope
+
+Example output:
+python3 symmetric_111.py < symmetric_stdin_01_111.txt
+Ben
+Sylvia
+Penelope
+Thomas
+Una
+
+
+Solution:
+
+#!/usr/bin/env python3
+
+import sys
+
+def main():
+
+  line = [line.strip() for line in sys.stdin]
+  a = []
+  b = []
+
+  for i in range(len(lines)):
+    if i % 2 == 0:
+      a.append(lines[i])
+
+    else:
+      b.insert(0, lines[i])
+
+  for name in a + b:
+    print(name)
+
+if __name__ == "__main__":
+  main()
